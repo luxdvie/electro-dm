@@ -1,0 +1,17 @@
+:host {
+	display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.122);
+    justify-content: space-between;
+    height: auto;
+    white-space: nowrap;
+    box-shadow: 0px 0px 3px 2px grey;
+	width: calc(100% - 30px);
+	margin-left: 5px;
+	margin-right: 5px;
+	overflow-y: hidden;
+	overflow-x: auto;
+    padding: 20px 10px;
+}

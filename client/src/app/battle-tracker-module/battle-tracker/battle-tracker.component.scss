@@ -1,0 +1,42 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	justify-content: center;
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fbfbfb;
+    padding: 20px;
+    border: 1px solid #fbfbfb;
+    box-shadow: 0px 0px 3px 1px grey;
+    margin: 5px auto;
+    width: 90%;
+
+	&.current-player {
+		background: yellow;
+	}
+
+	.icon, .name {
+		overflow:hidden;
+		text-overflow: ellipsis;
+		margin-right: 10px;
+	}
+
+	.icon {
+		width: 50px;
+		font-size: 48px;
+	}
+
+	.name {
+		width: 100px;
+	}
+}

@@ -1,0 +1,19 @@
+<section class="container">
+	<section role="heading">
+		<h1>Device</h1>
+	</section>
+
+	<section role="form">
+		<input type="number" [(ngModel)]="numLEDs" placeholder="How many LEDs?" />
+	</section>
+
+	<section class="frame-tracker">
+		<button type="button" (click)="goToFrame(currentFrame - 1)">Previous</button>
+		<input type="number" name="currentFrame" [value]="currentFrame">
+		<button type="button" (click)="goToFrame(currentFrame + 1)">Next</button>
+	</section>
+
+	<section class="layer-container" #layerContainer>
+		<app-animation-layer *ngFor="let layer of layers" [layer]="layer" [numLEDs]=numLEDs></app-animation-layer>
+	</section>
+</section>

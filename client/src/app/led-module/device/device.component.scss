@@ -1,0 +1,21 @@
+.container {
+	height: 100%;
+	width: 100%; overflow: hidden;
+}
+
+.layer-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	overflow: hidden;
+}
+
+.frame-tracker {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
