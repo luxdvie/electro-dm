@@ -7,9 +7,12 @@
 		<button mat-raised-button color="warn" (click)="reset()">Reset</button>
 	</div>
 	<div class="body">
-		<div class="player" *ngFor="let player of players; let i = index" [class.current-player]="currentPlayerIndex === i">
+		<div class="player" *ngFor="let player of players; let i = index"
+			[class.current-player]="currentPlayerIndex === i">
 			<span class="icon">
-				<mat-icon aria-hidden="false" aria-label="Example home icon" style="font-size: 42px;">
+				<img *ngIf="player.image" [src]="'/assets/profile/' + player.image" class="profile-pic" />
+				<mat-icon *ngIf="!player.image" aria-hidden="false" aria-label="Example home icon"
+					style="font-size: 42px;">
 					{{player.playerType === 'DM' ? 'face_retouching_off' : 'face' }}
 				</mat-icon>
 			</span>

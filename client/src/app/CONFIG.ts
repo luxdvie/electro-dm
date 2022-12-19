@@ -1,6 +1,7 @@
 interface StartingPlayer {
 	name: string;
 	seat: number;
+	image: string | null;
 }
 
 export enum Commands {
@@ -16,22 +17,27 @@ export const config = {
 		{
 			name: "Frances",
 			seat: 0,
+			image: null,
 		},
 		{
 			name: "Sandra Ravage",
 			seat: 1,
+			image: "tyler.jpeg",
 		},
 		{
 			name: "Drip",
 			seat: 2,
+			image: "zach.jpeg",
 		},
 		{
 			name: "Angelica",
 			seat: 3,
+			image: "bgreen.jpeg",
 		},
 		{
 			name: "Nathan",
 			seat: 4,
+			image: null,
 		},
 	],
 	numPlayers: () => {

@@ -17,12 +17,19 @@ export class Player {
 	conditions: Condition[] = [];
 	playerType: PlayerType;
 	seat: number = 0;
+	image: string | null = null;
 
-	constructor(name: string, seat: number, type: PlayerType = PlayerType.DM) {
+	constructor(
+		name: string,
+		seat: number,
+		image: string | null,
+		type: PlayerType = PlayerType.DM
+	) {
 		this.name = name;
 		this.initiative = 0;
 		this.playerType = type;
 		this.seat = seat;
+		this.image = image;
 	}
 
 	setInitiative(value: number) {

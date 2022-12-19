@@ -36,6 +36,7 @@ export class BattleTrackerComponent implements OnInit {
 				new Player(
 					startingPlayer.name,
 					startingPlayer.seat,
+					startingPlayer.image,
 					PlayerType.Player
 				)
 		);

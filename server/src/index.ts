@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 import * as serial from "serialport";
 
-const arduinoSerialPort = "/dev/tty.usbserial-1130";
+const arduinoSerialPort = "/dev/tty.usbserial-1120";
 const baudRate = 9600;
 const httpPort = 8080;
 let serialPort: serial.SerialPort;
