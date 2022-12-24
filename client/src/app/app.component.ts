@@ -18,7 +18,6 @@ export class AppComponent {
 		protected viewService: ViewServiceService
 	) {
 		this.viewService.fullScreen$.subscribe((fullScreen) => {
-			console.log('full screen changed to: ' + fullScreen);
 			this.fullScreen = fullScreen;
 		});
 	}

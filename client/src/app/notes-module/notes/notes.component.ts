@@ -29,8 +29,4 @@ export class NotesComponent implements OnInit {
 	ngOnDestroy(): void {
 		this.editor.destroy();
 	}
-
-	onChange() {
-		console.log("here");
-	}
 }

@@ -1,5 +1,4 @@
 import {
-	ChangeDetectorRef,
 	Component,
 	ElementRef,
 	HostListener,
@@ -7,7 +6,7 @@ import {
 	QueryList,
 	ViewChildren
 } from "@angular/core";
-import { Player } from "src/app/battle-tracker-module/Player";
+import { Player, PlayerType } from "src/app/battle-tracker-module/Player";
 import { BattleService } from "src/app/battle.service";
 import { SocketServiceService } from "src/app/socket-service.service";
 import { ViewServiceService } from "src/app/view-service.service";
@@ -20,6 +19,7 @@ import { ViewServiceService } from "src/app/view-service.service";
 export class OrderTrackerComponent implements OnInit {
 	@ViewChildren("rowGraphic") graphics!: QueryList<ElementRef>;
 
+	showDM: boolean = false;
 	currentPlayer: Player | undefined;
 
 	leftPaddingNumber: number = 200;
@@ -27,6 +27,14 @@ export class OrderTrackerComponent implements OnInit {
 	numWidth: number = 100;
 	nameWidth: number = 150;
 	fontSize: number = 83;
+
+	players: Player[] = [];
+	allPlayers: Player[] = [];
+	nextPlayerName: string | undefined;
+	rowHeight: number = 50;
+	get numPlayers() {
+		return this.players.length;
+	}
 
 	@HostListener("window:resize", ["$event"])
 	onResize(event: Event) {
@@ -46,18 +54,37 @@ export class OrderTrackerComponent implements OnInit {
 		protected viewService: ViewServiceService,
 		protected battleService: BattleService,
 		protected socketService: SocketServiceService,
-		private cdr: ChangeDetectorRef,
 		private elementRef: ElementRef
 	) {
 		this.battleService.currentPlayer$.subscribe((player) => {
-			console.log("new currentPlayer :>> ", player);
+			this.nextPlayerName = undefined;
+
 			this.currentPlayer = player;
+			this.showDM = this.currentPlayer?.playerType === PlayerType.DM;
+
+			if (this.currentPlayer) {
+				let nextUpIndex = this.battleService.currentPlayerIndex! + 1;
+				if (nextUpIndex >= this.allPlayers.length) {
+					nextUpIndex = 0;
+				}
+
+				const nextPlayer = this.allPlayers[nextUpIndex];
+				if (nextPlayer.playerType === PlayerType.DM) {
+					this.nextPlayerName = "DM!";
+				} else {
+					this.nextPlayerName = nextPlayer.name;
+				}
+			}
 		});
 
 		this.socketService
 			.fromEvent("playersChanged")
 			.subscribe((newPlayers: any) => {
-				this.players = newPlayers as Player[];
+				this.allPlayers = newPlayers as Player[];
+				this.players = this.allPlayers.filter(
+					(p) => p.playerType === PlayerType.Player
+				);
+
 				this.handleResize();
 			});
 
@@ -78,32 +105,15 @@ export class OrderTrackerComponent implements OnInit {
 		}, 10);
 	}
 
-	rowHeight: number = 50;
-
-	get numPlayers() {
-		return this.players.length;
-	}
-
-	players: Player[] = [];
-
 	ngOnInit(): void {
 		setTimeout(() => {
 			this.viewService.setFullScreen(true);
 		});
 	}
 
-	reposTimer: any = null;
-	ngAfterViewChecked() {
-		// window.clearTimeout(this.reposTimer);
-		// this.reposTimer = setTimeout(this.repositionElements, 50);
-	}
-
 	repositionElements = () => {
 		const graphic = this.graphics.get(0)?.nativeElement;
 		if (!graphic) return;
-
-		// const $init = this.initiatives.get(i)?.nativeElement as HTMLElement;
-		// const $name = this.rowNames.get(i)?.nativeElement as HTMLElement;
 
 		const box = (graphic as HTMLElement).getBoundingClientRect();
 

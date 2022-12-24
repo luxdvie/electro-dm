@@ -15,31 +15,43 @@ export const config = {
 	dmSeat: 6,
 	startingPlayers: [
 		{
-			name: "Frances",
+			name: "Icarus",
 			seat: 0,
 			image: null,
 		},
 		{
-			name: "Sandra Ravage",
+			name: "Xem",
 			seat: 1,
 			image: "tyler.jpeg",
-		},
-		{
-			name: "Drip",
-			seat: 2,
-			image: "zach.jpeg",
-		},
-		{
-			name: "Angelica",
-			seat: 3,
-			image: "bgreen.jpeg",
-		},
-		{
-			name: "Nathan",
-			seat: 4,
-			image: null,
-		},
+		}
 	],
+	// startingPlayers: [
+	// 	{
+	// 		name: "Frances",
+	// 		seat: 0,
+	// 		image: null,
+	// 	},
+	// 	{
+	// 		name: "Sandra Ravage",
+	// 		seat: 1,
+	// 		image: "tyler.jpeg",
+	// 	},
+	// 	{
+	// 		name: "Drip",
+	// 		seat: 2,
+	// 		image: "zach.jpeg",
+	// 	},
+	// 	{
+	// 		name: "Angelica",
+	// 		seat: 3,
+	// 		image: "bgreen.jpeg",
+	// 	},
+	// 	{
+	// 		name: "Nathan",
+	// 		seat: 4,
+	// 		image: null,
+	// 	},
+	// ],
 	numPlayers: () => {
 		return config.startingPlayers.length;
 	},

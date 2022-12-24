@@ -3,7 +3,7 @@
 
   int Globals::ledPin = D6;
   int Globals::numLEDs = 362; // Number of LEDs in playerArea
-  int Globals::numPlayers = 5; // TODO: Make this configurable
+  int Globals::numPlayers = 2; // TODO: Make this configurable
   int Globals::maxPlayers = 6;
 
   // IMPORTANT: To reduce NeoPixel burnout risk, add 1000 uF capacitor across

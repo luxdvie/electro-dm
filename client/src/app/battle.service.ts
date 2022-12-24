@@ -59,7 +59,6 @@ export class BattleService {
 		this.socketService
 			.fromEvent("currentPlayerIndexChanged")
 			.subscribe((value: any) => {
-				console.log("currentPlayerIndexChanged: " + value);
 				if (value === null || value === undefined) {
 					this.setCurrentPlayer(undefined, false);
 				} else {
@@ -104,14 +103,14 @@ export class BattleService {
 			this.setCurrentPlayer(0, true);
 		}
 
-		if (this.currentPlayer) {
-			if (this.currentPlayer.playerType === PlayerType.DM) {
-				this.sendCommand(Commands.ShowDM);
-			} else {
-				// Show Player N
-				this.sendCommand(`P${this.currentPlayer.seat + 1}`);
-			}
-		}
+		// if (this.currentPlayer) {
+		// 	if (this.currentPlayer.playerType === PlayerType.DM) {
+		// 		this.sendCommand(Commands.ShowDM);
+		// 	} else {
+		// 		// Show Player N
+		// 		this.sendCommand(`P${this.currentPlayer.seat + 1}`);
+		// 	}
+		// }
 	}
 
 	addChar() {

@@ -135,12 +135,14 @@ svg {
 	.name,
 	.number {
 		z-index: 950;
+		// animation: scaleAnimation 1s linear infinite;
 	}
 
 	.bg {
 		border: 5px solid rgb(138, 61, 61);
 		z-index: 100;
 		overflow: visible;
+		animation: scaleAnimation 1s linear infinite;
 	}
 
 	.bgFiller {
@@ -154,7 +156,8 @@ svg {
 		box-shadow: 0px 0px 10px 12px rgb(132, 8, 8);
 		// box-shadow: 0px 0px 10px 12px black;
 		opacity: 1;
-		animation: opacityAnimation 1s linear infinite;
+		animation: opacityAnimation 1s linear infinite,
+			scaleAnimation 1s linear infinite;
 		position: absolute;
 		border-radius: 52px;
 	}
@@ -162,6 +165,69 @@ svg {
 	.name,
 	.number {
 		font-weight: bold;
+	}
+}
+
+.bgFull {
+	height: 100%;
+	width: calc(100% - 100px);
+	position: absolute;
+	top: 0;
+	left: 50px;
+	border-radius: 50px;
+	animation: animatedBackground 60s linear infinite alternate;
+	background-image: url(http://192.168.1.144:4200/assets/order-tracker/paper.jpeg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: x-large;
+	height: calc(100% - 20px);
+	margin-top: 10px;
+	box-shadow: 0px 0px 22px 19px #8e2828;
+	transition: transform 0.5s linear;
+	transform: translateX(-150%);
+	z-index: 999999;
+
+	&.show {
+		transform: translateX(0%);
+	}
+
+	span.a {
+		position: absolute;
+		top: 5%;
+		font-size: 4.5rem;
+		max-width: 100%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		height: 25%;
+		display: flex;
+		font-style: italic;
+		margin-top: -25px;
+
+		align-items: center;
+		justify-content: center;
+	}
+
+	span.b {
+		position: absolute;
+		font-size: 2.25rem;
+		width: 100%;
+		text-overflow: ellipsis;
+		overflow: visible;
+		white-space: nowrap;
+		height: 2.25rem;
+		font-style: italic;
+		align-items: flex-end;
+		justify-content: flex-end;
+		margin-top: 70%;
+		text-align: center;
+		padding-right: 25px;
+		bottom: 10%;
+	}
+
+	img {
+		position: relative;
 	}
 }
 
@@ -176,5 +242,19 @@ svg {
 
 	100% {
 		opacity: 0;
+	}
+}
+
+@keyframes scaleAnimation {
+	0% {
+		scale: 1;
+	}
+
+	50% {
+		scale: 1.02;
+	}
+
+	100% {
+		scale: 1;
 	}
 }
