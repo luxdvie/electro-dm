@@ -37,8 +37,12 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatTreeModule } from "@angular/material/tree";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SocketIoConfig, SocketIoModule } from "ngx-socket-io";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { config as CONFIG } from "./CONFIG";
+
+const config: SocketIoConfig = { url: CONFIG.apiUrl, options: {} };
 
 @NgModule({
 	declarations: [AppComponent],
@@ -83,6 +87,7 @@ import { AppComponent } from "./app.component";
 		MatTooltipModule,
 		MatTreeModule,
 		OverlayModule,
+		SocketIoModule.forRoot(config),
 	],
 	providers: [],
 	bootstrap: [AppComponent],

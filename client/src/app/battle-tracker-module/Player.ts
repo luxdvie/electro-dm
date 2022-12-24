@@ -18,6 +18,7 @@ export class Player {
 	playerType: PlayerType;
 	seat: number = 0;
 	image: string | null = null;
+	backgroundOffset: number;
 
 	constructor(
 		name: string,
@@ -30,6 +31,7 @@ export class Player {
 		this.playerType = type;
 		this.seat = seat;
 		this.image = image;
+		this.backgroundOffset = 0;
 	}
 
 	setInitiative(value: number) {

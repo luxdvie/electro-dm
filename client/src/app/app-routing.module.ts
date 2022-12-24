@@ -22,6 +22,13 @@ const routes: Routes = [
 			),
 	},
 	{
+		path: "order-tracker",
+		loadChildren: () =>
+			import("../app/order-tracker-module/order-tracker.module").then(
+				(m) => m.OrderTrackerModule
+			),
+	},
+	{
 		path: "",
 		redirectTo: "battle",
 		pathMatch: "full",

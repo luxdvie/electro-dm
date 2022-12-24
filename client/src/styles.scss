@@ -13,4 +13,12 @@ body {
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.sci-fi-font {
+	font-family: 'share_tech_monoregular';
+}
+
+* {
+	box-sizing: border-box
+}
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";

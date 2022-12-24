@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { ThemePalette } from "@angular/material/core";
 import { Router } from "@angular/router";
+import { ViewServiceService } from "./view-service.service";
 
 @Component({
 	selector: "app-root",
@@ -8,9 +9,19 @@ import { Router } from "@angular/router";
 	styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-	links = ["Battle", "Notes", "Led"];
+	links = ["Battle", "Notes", "Order Tracker", "Led"];
 
-	constructor(protected router: Router) {}
+	fullScreen: boolean = false;
+
+	constructor(
+		protected router: Router,
+		protected viewService: ViewServiceService
+	) {
+		this.viewService.fullScreen$.subscribe((fullScreen) => {
+			console.log('full screen changed to: ' + fullScreen);
+			this.fullScreen = fullScreen;
+		});
+	}
 
 	private _activeLink: string = "Battle";
 	get activeLink() {
@@ -18,7 +29,7 @@ export class AppComponent {
 	}
 	set activeLink(value: string) {
 		if (this._activeLink != value) {
-			this._activeLink = value.toLowerCase();
+			this._activeLink = value.toLowerCase().replace(/\ /gi, "-");
 			this.router.navigate([this._activeLink]);
 		}
 	}
