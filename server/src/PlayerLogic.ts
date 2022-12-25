@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io';
 import { WebSocketInstance } from '.';
+import { SocketEvents } from '../../shared/src/SocketEvents';
 import { SerialLogic } from './SerialLogic';
-import { SocketEvents } from './SocketEvents';
 
 let players: any[] = [];
 let currentPlayerIndex: number | undefined = 0;
@@ -72,7 +72,7 @@ export class PlayerLogic {
 				}
 
 				WebSocketInstance.emit(
-					'currentPlayerIndexChanged',
+					SocketEvents.PlayerIndexChanged,
 					currentPlayerIndex
 				);
 			}
@@ -88,7 +88,7 @@ export class PlayerLogic {
 					}
 
 					WebSocketInstance.emit(
-						'currentPlayerIndexChanged',
+						SocketEvents.PlayerIndexChanged,
 						currentPlayerIndex
 					);
 				}

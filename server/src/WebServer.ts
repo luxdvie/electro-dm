@@ -1,10 +1,10 @@
 import cors from 'cors';
 import { Socket } from 'socket.io';
 import { ExpressInstance, HttpInstance, WebSocketInstance } from '.';
-import { ElectroDmConfig } from './ElectroDmConfig';
+import { ElectroDmConfig } from '../../shared/src/index';
+import { SocketEvents } from '../../shared/src/SocketEvents';
 import { PlayerLogic } from './PlayerLogic';
 import { SerialLogic } from './SerialLogic';
-import { SocketEvents } from './SocketEvents';
 
 export class WebServer {
 	constructor(

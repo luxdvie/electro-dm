@@ -5,19 +5,24 @@ import {
 	OnInit,
 	QueryList,
 	ViewChildren
-} from "@angular/core";
-import { Player, PlayerType } from "src/app/battle-tracker-module/Player";
-import { BattleService } from "src/app/battle.service";
-import { SocketServiceService } from "src/app/socket-service.service";
-import { ViewServiceService } from "src/app/view-service.service";
+} from '@angular/core';
+import { BattleService } from 'src/app/battle.service';
+import { SocketServiceService } from 'src/app/socket-service.service';
+import { ViewServiceService } from 'src/app/view-service.service';
+import { ElectroDmConfig } from '../../../../../shared/src';
+import { Player, PlayerType } from '../../../../../shared/src/Player';
 
 @Component({
-	selector: "app-order-tracker",
-	templateUrl: "./order-tracker.component.html",
-	styleUrls: ["./order-tracker.component.scss"],
+	selector: 'app-order-tracker',
+	templateUrl: './order-tracker.component.html',
+	styleUrls: ['./order-tracker.component.scss'],
 })
 export class OrderTrackerComponent implements OnInit {
-	@ViewChildren("rowGraphic") graphics!: QueryList<ElementRef>;
+	@ViewChildren('rowGraphic') graphics!: QueryList<ElementRef>;
+
+	get clientUrl(): string {
+		return ElectroDmConfig.clientUrl;
+	}
 
 	showDM: boolean = false;
 	currentPlayer: Player | undefined;
@@ -36,14 +41,14 @@ export class OrderTrackerComponent implements OnInit {
 		return this.players.length;
 	}
 
-	@HostListener("window:resize", ["$event"])
+	@HostListener('window:resize', ['$event'])
 	onResize(event: Event) {
 		setTimeout(() => {
 			this.handleResize();
 		}, 10);
 	}
 
-	@HostListener("window:orientationchange", ["$event"])
+	@HostListener('window:orientationchange', ['$event'])
 	onOrientationChange(event: Event) {
 		setTimeout(() => {
 			this.handleResize();
@@ -70,7 +75,7 @@ export class OrderTrackerComponent implements OnInit {
 
 				const nextPlayer = this.allPlayers[nextUpIndex];
 				if (nextPlayer.playerType === PlayerType.DM) {
-					this.nextPlayerName = "DM!";
+					this.nextPlayerName = 'DM!';
 				} else {
 					this.nextPlayerName = nextPlayer.name;
 				}
@@ -78,7 +83,7 @@ export class OrderTrackerComponent implements OnInit {
 		});
 
 		this.socketService
-			.fromEvent("playersChanged")
+			.fromEvent('playersChanged')
 			.subscribe((newPlayers: any) => {
 				this.allPlayers = newPlayers as Player[];
 				this.players = this.allPlayers.filter(
@@ -88,7 +93,7 @@ export class OrderTrackerComponent implements OnInit {
 				this.handleResize();
 			});
 
-		this.socketService.send("refreshPlayers", () => {});
+		this.socketService.send('refreshPlayers', () => {});
 	}
 
 	private handleResize() {
@@ -96,7 +101,7 @@ export class OrderTrackerComponent implements OnInit {
 			Math.floor(window.innerHeight / this.players.length) - 20;
 
 		this.elementRef.nativeElement.style.setProperty(
-			"--rowHeight",
+			'--rowHeight',
 			`${this.rowHeight}px`
 		);
 

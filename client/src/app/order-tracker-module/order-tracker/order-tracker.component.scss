@@ -5,7 +5,6 @@
 	padding: 0;
 	overflow: hidden;
 	background: red;
-	background-image: url("http://192.168.1.144:4200/assets/order-tracker/bg.jpeg");
 	background-position: center; /* Center the image */
 	background-repeat: no-repeat; /* Do not repeat the image */
 	background-size: cover; /* Resize the background image to cover the entire container */
@@ -112,7 +111,6 @@
 	left: 50px;
 	border-radius: 50px;
 	animation: animatedBackground 60s linear infinite alternate;
-	background-image: url(http://192.168.1.144:4200/assets/order-tracker/paper.jpeg);
 }
 
 .svg-container,
@@ -176,7 +174,6 @@ svg {
 	left: 50px;
 	border-radius: 50px;
 	animation: animatedBackground 60s linear infinite alternate;
-	background-image: url(http://192.168.1.144:4200/assets/order-tracker/paper.jpeg);
 	display: flex;
 	align-items: center;
 	justify-content: center;

@@ -3,14 +3,12 @@ import * as serial from 'serialport';
 let _serialSingleton: SerialLogic | undefined;
 
 // const arduinoSerialPort = "/dev/tty.usbserial-120"; // "/dev/tty.usbserial-1120";
-// const baudRate = 9600;
 
 export class SerialLogic {
 	private instance: serial.SerialPort | undefined;
+	private constructor(protected baudRate: number, protected port?: string) {}
 
-	private constructor(protected baudRate: number, protected port: string) {}
-
-	static makeSerial(baudRate: number, port: string) {
+	static makeSerial(baudRate: number, port?: string) {
 		if (_serialSingleton) {
 			return _serialSingleton;
 		}
@@ -48,10 +46,26 @@ export class SerialLogic {
 	}
 
 	private init = async () => {
+		if (!this.port) {
+			this.port = '';
+			const list = await serial.SerialPort.list();
+			list.forEach((port) => {
+				if (port.path.toLowerCase().indexOf('usbserial') > -1) {
+					this.port = port.path;
+				}
+			});
+
+			if (!this.port) {
+				console.error(
+					'A Serial Port was not configured in ElectroDmConfig, and a "UsbSerial" device cannot be automatically found.'
+				);
+			}
+		}
+
 		return new Promise<void>((resolve, reject) => {
 			try {
 				this.instance = new serial.SerialPort({
-					path: this.port,
+					path: this.port!,
 					baudRate: this.baudRate,
 				});
 

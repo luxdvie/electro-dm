@@ -1,5 +1,5 @@
 import express from 'express';
-import { ElectroDmConfig } from './ElectroDmConfig';
+import { ElectroDmConfig } from '../../shared/src/index';
 import { PlayerLogic } from './PlayerLogic';
 import { SerialLogic } from './SerialLogic';
 import { WebServer } from './WebServer';

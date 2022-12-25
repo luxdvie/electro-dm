@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { Player, PlayerType } from "./battle-tracker-module/Player";
-import { Commands, config } from "./CONFIG";
-import { SocketServiceService } from "./socket-service.service";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Commands, ElectroDmConfig } from '../../../shared/src/index';
+import { Player, PlayerType } from '../../../shared/src/Player';
+import { SocketServiceService } from './socket-service.service';
 
 @Injectable({
-	providedIn: "root",
+	providedIn: 'root',
 })
 export class BattleService {
 	private _currentPlayer = new BehaviorSubject<Player | undefined>(undefined);
@@ -19,7 +19,7 @@ export class BattleService {
 	setPlayers(value: Player[], broadcast: boolean = true) {
 		this._players = value;
 		if (broadcast) {
-			this.socketService.send("players", this._players);
+			this.socketService.send('players', this._players);
 		}
 	}
 
@@ -31,7 +31,7 @@ export class BattleService {
 	setCurrentPlayer(value: number | undefined, broadcast: boolean = true) {
 		this._currentPlayerIndex = value;
 		if (broadcast) {
-			this.socketService.send("currentPlayerIndex", value);
+			this.socketService.send('currentPlayerIndex', value);
 		}
 
 		if (this._currentPlayerIndex === undefined) {
@@ -51,13 +51,13 @@ export class BattleService {
 
 	constructor(private socketService: SocketServiceService) {
 		this.socketService
-			.fromEvent("playersChanged")
+			.fromEvent('playersChanged')
 			.subscribe((newPlayers: any) => {
 				this.setPlayers(newPlayers as Player[], false);
 			});
 
 		this.socketService
-			.fromEvent("currentPlayerIndexChanged")
+			.fromEvent('currentPlayerIndexChanged')
 			.subscribe((value: any) => {
 				if (value === null || value === undefined) {
 					this.setCurrentPlayer(undefined, false);
@@ -73,13 +73,13 @@ export class BattleService {
 	}
 
 	sendCommand(command: string) {
-		window.fetch(`${config.apiUrl}/send?command=${command}`);
+		window.fetch(`${ElectroDmConfig.apiUrl}/send?command=${command}`);
 	}
 
 	reset() {
 		this.sendCommand(Commands.Off);
 		this.setPlayers(
-			config.startingPlayers.map(
+			ElectroDmConfig.startingPlayers.map(
 				(startingPlayer) =>
 					new Player(
 						startingPlayer.name,
@@ -102,21 +102,14 @@ export class BattleService {
 		if (this.currentPlayerIndex! >= this.players.length) {
 			this.setCurrentPlayer(0, true);
 		}
-
-		// if (this.currentPlayer) {
-		// 	if (this.currentPlayer.playerType === PlayerType.DM) {
-		// 		this.sendCommand(Commands.ShowDM);
-		// 	} else {
-		// 		// Show Player N
-		// 		this.sendCommand(`P${this.currentPlayer.seat + 1}`);
-		// 	}
-		// }
 	}
 
 	addChar() {
-		const name = window.prompt("Enter character name:");
+		const name = window.prompt('Enter character name:');
 		if (name) {
-			this.players.push(new Player(name, config.dmSeat, PlayerType.DM));
+			this.players.push(
+				new Player(name, ElectroDmConfig.dmSeat, PlayerType.DM)
+			);
 		}
 
 		this.setPlayers(this.players, true);
