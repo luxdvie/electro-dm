@@ -1,0 +1,20 @@
+{
+	"name": "electro-dm",
+	"version": "1.0.0",
+	"description": "A project that helps build player engagement and facilitates DM tasks.",
+	"main": "index.js",
+	"scripts": {
+		"setup": "(cd client && npm install && cd ..) && (cd server && npm install && cd ..)",
+		"start": "(cd client && npm run start) & (cd server && npm run start && cd ..)"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/luxdvie/electro-dm.git"
+	},
+	"author": "Austin Brown",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/luxdvie/electro-dm/issues"
+	},
+	"homepage": "https://github.com/luxdvie/electro-dm#readme"
+}
