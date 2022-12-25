@@ -11,12 +11,16 @@ export class PlayerLogic {
 	private constructor(protected serialLogic: SerialLogic) {}
 
 	onHello = (socket: Socket) => {
-		socket.emit('playersChanged', players);
-		socket.emit('currentPlayerIndexChanged', currentPlayerIndex);
+		socket.emit(SocketEvents.PlayersChanged, players);
+		socket.emit(SocketEvents.PlayerIndexChanged, currentPlayerIndex);
 	};
 
 	onRefreshPlayers = (socket: Socket) => {
 		socket.emit(SocketEvents.PlayersChanged, players);
+	};
+
+	onConfigureServer = (data: { numLEDs: number; numPlayers: number }) => {
+		this.serialLogic.sendCommand(`CS,${data.numLEDs},${data.numPlayers}`);
 	};
 
 	onNewPlayers = (newPlayers: any[]) => {

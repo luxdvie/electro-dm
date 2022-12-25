@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {
-	Commands, ElectroDmConfig, Player, PlayerType
+	Commands,
+	ElectroDmConfig,
+	Player,
+	PlayerType,
+	SocketEvents
 } from '../../../../shared/src';
 import { SocketServiceService } from './socket-service.service';
 
@@ -78,6 +82,11 @@ export class BattleService {
 	}
 
 	reset() {
+		this.socketService.send(SocketEvents.ConfigureServer, {
+			numLEDs: ElectroDmConfig.numLEDs,
+			numPlayers: ElectroDmConfig.numPlayers(),
+		});
+
 		this.sendCommand(Commands.Off);
 		this.setPlayers(
 			ElectroDmConfig.startingPlayers.map(
@@ -95,14 +104,16 @@ export class BattleService {
 	}
 
 	startOrNext() {
-		if (this.currentPlayerIndex === undefined) {
-			this.setCurrentPlayer(-1, false);
-		}
+		setTimeout(() => {
+			if (this.currentPlayerIndex === undefined) {
+				this.setCurrentPlayer(-1, false);
+			}
 
-		this.setCurrentPlayer(this.currentPlayerIndex! + 1, true);
-		if (this.currentPlayerIndex! >= this.players.length) {
-			this.setCurrentPlayer(0, true);
-		}
+			this.setCurrentPlayer(this.currentPlayerIndex! + 1, true);
+			if (this.currentPlayerIndex! >= this.players.length) {
+				this.setCurrentPlayer(0, true);
+			}
+		}, 50);
 	}
 
 	addChar() {

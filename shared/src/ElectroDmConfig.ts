@@ -15,6 +15,7 @@ export const SERVER_PORT = 8080; // The port on which the server app runs.
 export const CLIENT_PORT = 4200; // The port on which the frontend app runs.
 
 export const ElectroDmConfig = {
+	numLEDs: 362,
 	baudRate: 9600,
 	port: undefined, // Leave undefined to default to 'Find' the serial port
 	ip: IP_ADDRESS,

@@ -2,8 +2,8 @@
 #include "Globals.h"
 
   int Globals::ledPin = D6;
-  int Globals::numLEDs = 362; // Number of LEDs in playerArea
-  int Globals::numPlayers = 2; // TODO: Make this configurable
+  int Globals::numLEDs = 20;
+  int Globals::numPlayers = 2;
   int Globals::maxPlayers = 6;
 
   // IMPORTANT: To reduce NeoPixel burnout risk, add 1000 uF capacitor across
@@ -14,3 +14,14 @@
   //   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
   //   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
   Adafruit_NeoPixel Globals::strip = Adafruit_NeoPixel(numLEDs, ledPin, NEO_RGBW + NEO_KHZ800);
+
+  bool Globals::configureStrip(int numLEDs, int numPlayers) {  
+    if (numLEDs == Globals::numLEDs && numPlayers == Globals::numPlayers) {
+      return false; // Don't waste the resources to recreate the strip if it already matches
+    }
+
+    Globals::numLEDs = numLEDs;
+    Globals::numPlayers = numPlayers;
+    Globals::strip.updateLength(Globals::numLEDs);
+    return true;
+  }

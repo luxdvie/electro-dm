@@ -4,4 +4,5 @@ export enum SocketEvents {
 	RefreshPlayers = 'getPlayers',
 	PlayerIndexChanged = 'currentPlayerIndexChanged',
 	PlayersChanged = 'playersChanged',
+	ConfigureServer = 'configureServer'
 }

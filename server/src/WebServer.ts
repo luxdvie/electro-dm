@@ -76,6 +76,11 @@ export class WebServer {
 			);
 
 			socket.on(
+				SocketEvents.ConfigureServer,
+				this.playerLogic.onConfigureServer
+			);
+
+			socket.on(
 				SocketEvents.PlayersReceived,
 				this.playerLogic.onNewPlayers
 			);

@@ -27,7 +27,7 @@ void setup() {
   controller.setup();
 }
 
-const int BUFFER_SIZE = 5;
+const int BUFFER_SIZE = 10;
 char buf[BUFFER_SIZE];
 void loop() {
   if (Serial.available() > 0) {

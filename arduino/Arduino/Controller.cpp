@@ -13,6 +13,7 @@
     PN: Show the next player, resets to 0 at the end
     PP: Show the previous player, resets to the last player at the beginning
     F: Render a variable-length, variable-duration fireball
+    CS: 'ConfigureServer'. example: 'CS,numLeds,numPlayers', 'CS,362,4'
     Off: Disable currentPlayer and any animations, turn off all LEDs
 */
 
@@ -96,6 +97,31 @@ void Controller::sendCommand(char* buf, int size) {
      this->fireFramesRemaining = 0;
      this->currentPlayer = 999;
      return;
+  }
+
+  if (buf[0] == 'C' && buf[1] == 'S') {
+    // Configure server. buf[2] is the first comma
+    // Read from 3...n. Read numLED digits until next comma, then read numPlayers digits until end.
+    // Then, convert to integer and reconfigure the strip.
+    
+    String numLEDs;
+    String numPlayers;
+    int readingLEDs = 1;
+    for (int i = 3; i < size; i++) {
+      if (buf[i] == ',') {
+        readingLEDs = 0;
+        continue;
+      }
+
+      if (readingLEDs == 1) {
+        numLEDs += buf[i];
+      } else {
+        numPlayers += buf[i];
+      }
+    }
+
+    bool wasChanged = Globals::configureStrip(numLEDs.toInt(), numPlayers.toInt());
+    if (wasChanged) this->setup();
   }
 
   if (buf[0] == 'R') {
