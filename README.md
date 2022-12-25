@@ -11,7 +11,11 @@ A platform built to facilitate Dungeons & Dragons Dungeon Master tasks with the 
 
 # What is it?
 
-It's a Laptop, Bluetooth Speaker, Custom Battle Station (with addressable RGB LEDs), Elgato Stream Deck, Spotify Playlists, Custom Client+Server software, and Phillips Hue Lights.
+It's a Laptop, Bluetooth Speaker, Custom Battle Station (with addressable RGB LEDs), Elgato Stream Deck, Spotify Playlists, Custom Client+Server software, custom sounds, and Phillips Hue Lights.
+
+## Elevator Pitch
+
+Use a soundboard, RGB LEDs, and a tablet to animate D&D actions, indicate player turns, present important player information, drive player engagement while making the process of DM'ing easier, more dynamic, and more fun.
 
 # Platform Components
 
@@ -36,6 +40,18 @@ This GitHub repository contains two applications - the "client" software and the
 The server is responsible for communicating between all instances of the applications and talking to the micro-controller.
 
 The client software has a "DM View" for the DM to manage encounters, take notes, and perform other special functions. The client software also has a "Presentation View" intended to be put on an iPad or TV that all players can see. This visually shows the initiative order during battle and other player-facing animations, scenes, and information.
+
+## Sounds + Scripts
+
+### Scripts
+
+In the `scripts` folder you'll find scripts that will be opened using the `System->Open` builtin Elgato function. You can do many things with the scripts but for now all I'm doing is starting/stopping Spotify playlists.
+
+*Note I am using a MacBook so I've only populated `scripts/apple/*.scpt` script files. If you were using Windows, I'm guessing you'd want to use PowerShell scripts instead.
+
+### Sounds
+
+In the `sounds` folder you'll find various audio clips that I've mapped to Elgato Stream Deck keys. This folder may go away long term since it's not a good idea to store large binary files in git.
 
 # Software Architecture
 
