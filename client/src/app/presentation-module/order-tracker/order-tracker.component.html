@@ -1,6 +1,6 @@
-<div class="container" [style.background-image.url]="clientUrl + '/assets/order-tracker/bg.jpeg'">
+<div class="container" [ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/bg.jpeg)' }">
 	<div class="bgFull sci-fi-font" [class.show]="showDM"
-		[style.background-image.url]="clientUrl + '/assets/order-tracker/paper.jpeg'">
+		[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/paper.jpeg)' }">
 		<span class="a">DM's Turn!</span>
 		<img [src]="clientUrl + '/assets/order-tracker/dice-t.webp'">
 		<span class="b" *ngIf="nextPlayerName">Up next: {{nextPlayerName}}</span>
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<div class="bg" [style.background-position-x.px]="player.backgroundOffset"
-			[style.background-image.url]="clientUrl + '/assets/order-tracker/paper.jpeg'">
+			[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/paper.jpeg)' }">
 		</div>
 		<div *ngIf="player.name === currentPlayer?.name" class="bgFiller">
 		</div>

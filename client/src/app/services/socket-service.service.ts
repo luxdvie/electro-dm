@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { ElectroDmConfig } from '../../../shared/src';
+import { ElectroDmConfig } from '../../../../shared/src';
 
 @Injectable({
 	providedIn: 'root',

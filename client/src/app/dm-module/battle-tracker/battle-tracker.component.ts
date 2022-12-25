@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { BattleService } from "src/app/battle.service";
-import { SocketServiceService } from "src/app/socket-service.service";
+import { Component, OnInit } from '@angular/core';
+import { BattleService } from 'src/app/services/battle.service';
+import { SocketServiceService } from 'src/app/services/socket-service.service';
 
 @Component({
-	selector: "app-battle-tracker",
-	templateUrl: "./battle-tracker.component.html",
-	styleUrls: ["./battle-tracker.component.scss"],
+	selector: 'app-battle-tracker',
+	templateUrl: './battle-tracker.component.html',
+	styleUrls: ['./battle-tracker.component.scss'],
 })
 export class BattleTrackerComponent implements OnInit {
 	get players() {

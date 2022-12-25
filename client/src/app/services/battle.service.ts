@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Commands, ElectroDmConfig } from '../../../shared/src/index';
-import { Player, PlayerType } from '../../../shared/src/Player';
+import {
+	Commands, ElectroDmConfig, Player, PlayerType
+} from '../../../../shared/src';
 import { SocketServiceService } from './socket-service.service';
 
 @Injectable({

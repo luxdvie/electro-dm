@@ -17,7 +17,7 @@ export class WebServer {
 	setup() {
 		ExpressInstance.use(
 			cors({
-				origin: '*',
+				origin: ElectroDmConfig.clientUrl,
 				allowedHeaders: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
 				credentials: true,
 			})
