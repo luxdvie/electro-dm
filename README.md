@@ -11,7 +11,7 @@ A platform built to facilitate Dungeons & Dragons Dungeon Master tasks with the 
 
 # What is it?
 
-It's a Laptop, Bluetooth Speaker, Custom Battle Station (with addressable RGB LEDs), Elgato Stream Deck, Spotify Playlists, Electro Client + Server Software, and Phillips Hue Lights.
+It's a Laptop, Bluetooth Speaker, Custom Battle Station (with addressable RGB LEDs), Elgato Stream Deck, Spotify Playlists, Custom Client+Server software, and Phillips Hue Lights.
 
 # Platform Components
 
