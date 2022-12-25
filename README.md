@@ -7,6 +7,8 @@ A platform built to facilitate Dungeons & Dragons Dungeon Master tasks with the 
 - Make the process of DM'ing more dynamic and easier to reproduce.
 - Make it FUN.
 
+** Still in progress as of 12/25/2022 **
+
 # What is it?
 
 It's a Laptop, Bluetooth Speaker, Custom Battle Station (with addressable RGB LEDs), Elgato Stream Deck, Spotify Playlists, Electro Client + Server Software, and Phillips Hue Lights.
