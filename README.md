@@ -29,6 +29,8 @@ Use an Elgato Stream Deck to control the following:
 - Start/stop Spotify Playlists
 - Initiate animations on the LED controller
 
+See the `/elgato-profile` folder for the Stream Deck Profiles.
+
 ## Electro DM Client + Server Software
 
 This GitHub repository contains two applications - the "client" software and the "server" software.
