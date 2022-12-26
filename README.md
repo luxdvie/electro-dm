@@ -1,31 +1,27 @@
 # Electro DM
 
-A platform built to facilitate Dungeons & Dragons Dungeon Master tasks with the following goals:
-- Build a totally immersive experience that captivates the party.
-- Build an experience that seamlessly transitions from one vibe to another.
-- Encourage, support, and increase buy-in from party members.
-- Make the process of DM'ing more dynamic and easier to reproduce.
-- Make it FUN.
+Use a NodeJS server and Angular frontend application combined with a soundboard, RGB LEDs, and a tablet to animate D&D actions, indicate player turns, present important player information, drive player engagement while making the process of DM'ing easier, more dynamic, and more fun.
 
-** Still in progress as of 12/25/2022 **
+## To see details on installing and running, see [Getting Starting](./docs/GettingStarted.MD).
 
 # What is it?
 
-It's a Laptop, Bluetooth Speaker, Custom Battle Station (with addressable RGB LEDs), Elgato Stream Deck, Spotify Playlists, Custom Client+Server software, custom sounds, and Phillips Hue Lights.
+This is a platform that starts with a laptop running NodeJS and Angular apps. From there, we add the following components to build an immersive D&D experienced.
 
-## Elevator Pitch
-
-Use a soundboard, RGB LEDs, and a tablet to animate D&D actions, indicate player turns, present important player information, drive player engagement while making the process of DM'ing easier, more dynamic, and more fun.
+- Loud speaker connected to laptop
+- Spotify Playlists, Sound Effects
+- Phillips Hue Lights (optional)
+- Elgato Stream Deck (optional)
+- Custom Battle Stations with RGB LEDs (optional)
 
 # Platform Components
 
-## Battle Station
+## Custom Battle Station
 
-Build a custom 36x24" "battle station" to hold [standard battle mats](https://www.amazon.com/gp/product/B085198LF5/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
+This is a custom 36x24" "battle station" to hold [standard battle mats](https://www.amazon.com/gp/product/B085198LF5/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
 
-Put a micro-controller (ESP8266/Arduino compatible recommend) on the bottom.
+See [Hardware Instructions](./docs/HardwareInstructions.MD) for details.
 
-Put high-density WS21812B addressable LEDs along the bottom perimeter of the frame. The LEDs show custom animations and track initiative based on where players are sitting.
 ## Elgato Stream Deck
 
 Use an Elgato Stream Deck to control the following:
@@ -63,17 +59,7 @@ In the `sounds` folder you'll find various audio clips that I've mapped to Elgat
 
 # Getting Started
 
-- Make sure you have or install [NodeJS](https://nodejs.org/en/). I'm using version 16.13.0.
-- Download or clone this repository. Extract, and navigate to the root folder.
-- Run `npm run setup` to install all dependencies
-- Open `shared/src/ElectroDmConfig.ts`
-  - Set your computers IP Address to the `IP_ADDRESS` constant value
-  - Configure your party's starting players
-  - If you're using an LED controller, set the following:
-    - Set `NUM_LEDS` to how many LEDs you have
-- Run `npm run start` to start the client and server applications
-- Navigate to `{{YOUR_IP_ADDRESS}}:4200/dm` to start the DM Client app
-- Navigate to `{{YOUR_IP_ADDRESS}}:4200` to start the Presentation Client app
+see [Getting Starting](./docs/GettingStarted.MD).
 
 # Bill of Materials
 
