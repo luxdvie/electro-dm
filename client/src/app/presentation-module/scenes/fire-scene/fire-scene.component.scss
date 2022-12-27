@@ -1,0 +1,34 @@
+:host {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	z-index: 888888;
+	top: 0;
+	left: 0;
+	border: none;
+	background: black;
+}
+
+video {
+	object-fit: cover;
+	width: 100vw;
+	height: 100vh;
+}
+
+.scene-transition {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	background: black;
+	transition: opacity .5s ease-in;
+	position: absolute;
+	z-index: 999999;
+
+	&.showing {
+		opacity: 1;
+	}
+}

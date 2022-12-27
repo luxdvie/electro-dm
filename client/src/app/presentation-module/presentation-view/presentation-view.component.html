@@ -1,1 +1,3 @@
-<app-order-tracker></app-order-tracker>
+<initiative-tracker *ngIf="scene === 'Initiative'"></initiative-tracker>
+<fire-scene *ngIf="scene === 'FireScene'"></fire-scene>
+<div *ngIf="scene === 'Offline'" class="offline"></div>

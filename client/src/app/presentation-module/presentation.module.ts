@@ -6,8 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule, Routes } from '@angular/router';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { OrderTrackerComponent } from './order-tracker/order-tracker.component';
 import { PresentationViewComponent } from './presentation-view/presentation-view.component';
+import { FireSceneComponent } from './scenes/fire-scene/fire-scene.component';
+import { InitiativeTrackerComponent } from './scenes/initiative-tracker/initiative-tracker.component';
 
 const routes: Routes = [
 	{
@@ -26,6 +27,10 @@ const routes: Routes = [
 		MatIconModule,
 		MatInputModule,
 	],
-	declarations: [PresentationViewComponent, OrderTrackerComponent],
+	declarations: [
+		PresentationViewComponent,
+		InitiativeTrackerComponent,
+		FireSceneComponent,
+	],
 })
 export class PresentationModule {}

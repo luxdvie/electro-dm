@@ -1,10 +1,11 @@
 import { Socket } from 'socket.io';
 import { WebSocketInstance } from '.';
-import { SocketEvents } from '../../shared/src/SocketEvents';
+import { PresentationMode, SocketEvents } from '../../shared/src/SocketEvents';
 import { SerialLogic } from './SerialLogic';
 
 let players: any[] = [];
 let currentPlayerIndex: number | undefined = 0;
+let scene: PresentationMode = PresentationMode.Initiative;
 
 let _playerLogic: PlayerLogic | undefined;
 export class PlayerLogic {
@@ -26,6 +27,16 @@ export class PlayerLogic {
 	onNewPlayers = (newPlayers: any[]) => {
 		players = newPlayers;
 		WebSocketInstance.emit(SocketEvents.PlayersChanged, players);
+	};
+
+	onSetScene = (newScene: PresentationMode) => {
+		scene = newScene;
+		console.log('scene :>> ', scene);
+		WebSocketInstance.emit(SocketEvents.SceneChanged, scene);
+	};
+
+	onRefreshScene = (socket: Socket) => {
+		socket.emit(SocketEvents.SceneChanged, scene);
 	};
 
 	onNewPlayerIndex = async (index: number | undefined) => {

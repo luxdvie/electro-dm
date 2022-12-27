@@ -9,15 +9,15 @@ import {
 import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
 import { ViewServiceService } from 'src/app/services/view-service.service';
-import { ElectroDmConfig } from '../../../../../shared/src';
-import { Player, PlayerType } from '../../../../../shared/src/Player';
+import { ElectroDmConfig, SocketEvents } from '../../../../../../shared/src';
+import { Player, PlayerType } from '../../../../../../shared/src/Player';
 
 @Component({
-	selector: 'app-order-tracker',
-	templateUrl: './order-tracker.component.html',
-	styleUrls: ['./order-tracker.component.scss'],
+	selector: 'initiative-tracker',
+	templateUrl: './initiative-tracker.component.html',
+	styleUrls: ['./initiative-tracker.component.scss'],
 })
-export class OrderTrackerComponent implements OnInit {
+export class InitiativeTrackerComponent implements OnInit {
 	@ViewChildren('rowGraphic') graphics!: QueryList<ElementRef>;
 
 	get clientUrl(): string {
@@ -83,7 +83,7 @@ export class OrderTrackerComponent implements OnInit {
 		});
 
 		this.socketService
-			.fromEvent('playersChanged')
+			.fromEvent(SocketEvents.PlayersChanged)
 			.subscribe((newPlayers: any) => {
 				this.allPlayers = newPlayers as Player[];
 				this.players = this.allPlayers.filter(
@@ -93,7 +93,7 @@ export class OrderTrackerComponent implements OnInit {
 				this.handleResize();
 			});
 
-		this.socketService.send('refreshPlayers', () => {});
+		this.socketService.send(SocketEvents.RefreshPlayers, undefined);
 	}
 
 	private handleResize() {
@@ -110,7 +110,12 @@ export class OrderTrackerComponent implements OnInit {
 		}, 10);
 	}
 
+	showing: boolean = false;
 	ngOnInit(): void {
+		setTimeout(() => {
+			this.showing = true;
+		}, 1000);
+
 		setTimeout(() => {
 			this.viewService.setFullScreen(true);
 		});

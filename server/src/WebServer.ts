@@ -2,7 +2,7 @@ import cors from 'cors';
 import { Socket } from 'socket.io';
 import { ExpressInstance, HttpInstance, WebSocketInstance } from '.';
 import { ElectroDmConfig } from '../../shared/src/index';
-import { SocketEvents } from '../../shared/src/SocketEvents';
+import { PresentationMode, SocketEvents } from '../../shared/src/SocketEvents';
 import { PlayerLogic } from './PlayerLogic';
 import { SerialLogic } from './SerialLogic';
 
@@ -34,6 +34,29 @@ export class WebServer {
 			} else {
 				res.send('Could not connect to controller. See console.');
 			}
+		});
+
+		ExpressInstance.get('/setScene', async (req, res) => {
+			const scene = req.query.scene;
+			if (!scene) {
+				res.status(400);
+				res.send('You must provide a scene URL parameter');
+				return;
+			}
+
+			if (
+				!Object.values(PresentationMode).includes(
+					scene as PresentationMode
+				)
+			) {
+				res.status(400);
+				res.send('Invalid scene provided.');
+				return;
+			}
+
+			this.playerLogic.onSetScene(scene as PresentationMode);
+
+			res.send('Sent scene.');
 		});
 
 		ExpressInstance.get('/send', async (req, res) => {
@@ -70,10 +93,9 @@ export class WebServer {
 		);
 
 		WebSocketInstance.on('connection', (socket: Socket) => {
-			socket.on(
-				SocketEvents.RefreshPlayers,
-				this.playerLogic.onRefreshPlayers
-			);
+			socket.on(SocketEvents.RefreshPlayers, () => {
+				this.playerLogic.onRefreshPlayers(socket);
+			});
 
 			socket.on(
 				SocketEvents.ConfigureServer,
@@ -84,6 +106,12 @@ export class WebServer {
 				SocketEvents.PlayersReceived,
 				this.playerLogic.onNewPlayers
 			);
+
+			socket.on(SocketEvents.RefreshScene, () => {
+				this.playerLogic.onRefreshScene(socket);
+			});
+
+			socket.on(SocketEvents.SetScene, this.playerLogic.onSetScene);
 
 			socket.on(
 				SocketEvents.CurrentPlayerIndexReceived,

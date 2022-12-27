@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderTrackerComponent } from './order-tracker.component';
+import { FireSceneComponent } from './fire-scene.component';
 
-describe('OrderTrackerComponent', () => {
-  let component: OrderTrackerComponent;
-  let fixture: ComponentFixture<OrderTrackerComponent>;
+describe('FireSceneComponent', () => {
+  let component: FireSceneComponent;
+  let fixture: ComponentFixture<FireSceneComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrderTrackerComponent ]
+      declarations: [ FireSceneComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OrderTrackerComponent);
+    fixture = TestBed.createComponent(FireSceneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
