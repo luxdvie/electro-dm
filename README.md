@@ -1,5 +1,7 @@
 # Electro DM
 
+For Dungeons & Dragons, for Dungeon Masters, for players:
+
 Use a NodeJS server and Angular frontend application combined with a soundboard, RGB LEDs, and a tablet to animate D&D actions, indicate player turns, present important player information, drive player engagement while making the process of DM'ing easier, more dynamic, and more fun.
 
 ## To see details on installing and running, see [Getting Starting](./docs/GettingStarted.MD).
