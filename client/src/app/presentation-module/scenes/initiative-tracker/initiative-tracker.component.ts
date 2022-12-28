@@ -9,8 +9,10 @@ import {
 import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
 import { ViewServiceService } from 'src/app/services/view-service.service';
-import { ElectroDmConfig, SocketEvents } from '../../../../../../shared/src';
-import { Player, PlayerType } from '../../../../../../shared/src/Player';
+import {
+	ElectroDmConfig, Player,
+	PlayerType, SocketEvents
+} from '../../../../../../shared/src';
 
 @Component({
 	selector: 'initiative-tracker',

@@ -1,5 +1,6 @@
 <initiative-tracker *ngIf="scene === 'Initiative'"></initiative-tracker>
 <fire-scene *ngIf="scene === 'FireScene'"></fire-scene>
+<storybook *ngIf="scene === 'Storybook'"></storybook>
 <div *ngIf="scene === 'Offline'" class="offline"></div>
 <div *ngIf="scene === 'Timer'" class="time">
 	<div class="time-container"
@@ -11,19 +12,7 @@
 			</span>
 			<span *ngIf="!timeIsUp" class="a"><!-- See you -->
 				{{ timeRemainingFormatted | date:'m:ss' }}
-				<!-- <ng-container *ngIf="seeYouSoon">
-					soon!
-				</ng-container>
-				<ng-container *ngIf="!seeYouSoon">
-					in <span *ngIf="timeRemainingFormatted.getMinutes()> 1">
-						{{ timeRemainingFormatted | date:'m' }} minutes, </span>
-					<span *ngIf="timeRemainingFormatted.getMinutes() === 1">
-						{{ timeRemainingFormatted | date:'m' }} minute, </span>
-					{{ timeRemainingFormatted | date:'s' }} seconds!
-				</ng-container> -->
-
 			</span>
-			<!-- <img [src]="clientUrl + '/assets/order-tracker/dice-t.webp'"> -->
 		</div>
 
 	</div>
@@ -34,6 +23,4 @@
 			<div class="bottom"></div>
 		</div>
 	</div>
-
-
 </div>

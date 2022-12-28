@@ -9,6 +9,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { PresentationViewComponent } from './presentation-view/presentation-view.component';
 import { FireSceneComponent } from './scenes/fire-scene/fire-scene.component';
 import { InitiativeTrackerComponent } from './scenes/initiative-tracker/initiative-tracker.component';
+import { StorybookComponent } from './scenes/storybook/storybook.component';
 
 const routes: Routes = [
 	{
@@ -31,6 +32,7 @@ const routes: Routes = [
 		PresentationViewComponent,
 		InitiativeTrackerComponent,
 		FireSceneComponent,
+		StorybookComponent,
 	],
 })
 export class PresentationModule {}

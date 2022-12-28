@@ -1,7 +1,10 @@
 import { Socket } from 'socket.io';
 import { WebSocketInstance } from '.';
-import { DEFAULT_BREAK_TIME_MS } from '../../shared/src/ElectroDmConfig';
-import { PresentationMode, SocketEvents } from '../../shared/src/SocketEvents';
+import {
+	DEFAULT_BREAK_TIME_MS,
+	PresentationMode,
+	SocketEvents
+} from '../../shared/src';
 import { SerialLogic } from './SerialLogic';
 
 let players: any[] = [];
@@ -32,6 +35,27 @@ export class PlayerLogic {
 	onNewPlayers = (newPlayers: any[]) => {
 		players = newPlayers;
 		WebSocketInstance.emit(SocketEvents.PlayersChanged, players);
+	};
+
+	storyPage: number = 0;
+	onGoToPage = (page: number) => {
+		this.storyPage = page;
+		WebSocketInstance.emit(SocketEvents.StoryPageChanged, this.storyPage);
+	};
+
+	onNextPage = () => {
+		this.storyPage++;
+		WebSocketInstance.emit(SocketEvents.StoryPageChanged, this.storyPage);
+	};
+
+	onPreviousPage = () => {
+		this.storyPage--;
+		this.storyPage = Math.max(0, this.storyPage);
+		WebSocketInstance.emit(SocketEvents.StoryPageChanged, this.storyPage);
+	};
+
+	onRefreshPage = (socket: Socket) => {
+		WebSocketInstance.emit(SocketEvents.StoryPageChanged, this.storyPage);
 	};
 
 	/** How frequently we send the server time to the client to reconcile differences in time remaining. */

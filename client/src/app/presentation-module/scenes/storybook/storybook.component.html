@@ -1,0 +1,21 @@
+<p>storybook works! page: {{page}}</p>
+
+<div class="container scene-transition" [class.showing]="showing"
+	[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/scenes/story-bg.jpeg)' }">
+	<div class="page-flip-container" [class.hide]="!isTurningPage">
+		<div class="bgFull sci-fi-font passive" [class.sliding-right]=" isTurningPage && direction==='Left'"
+			[class.sliding-left]=" isTurningPage && direction==='Right'"
+			[ngStyle]=" { 'background-image' : 'url(' + clientUrl + '/assets/order-tracker/paper.jpeg)' }">
+		</div>
+	</div>
+
+	<div class="bgFull sci-fi-font show"
+		[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/paper.jpeg)' }">
+		<ng-container *ngIf="pageContent">
+			<span class="a" *ngIf="pageContent.header">{{pageContent.header}}</span>
+			<img *ngIf="pageContent.image" [src]="pageContent.image">
+			<span class="b" *ngIf="pageContent.footer">ffff</span>
+		</ng-container>
+
+	</div>
+</div>

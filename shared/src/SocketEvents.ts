@@ -16,16 +16,10 @@ export enum SocketEvents {
 	/** Fired when a client updates how much time is remaining in timer mode. */
 	AddTime = 'addTime',
 	RefreshTime = 'refreshTime',
-}
 
-export enum PresentationMode {
-	/** Showing the initiative tracker. */
-	Initiative = 'Initiative',
-	/** Showing a fire scene. */
-	FireScene = 'FireScene',
-	/** Shows a plain black screen. */
-	Offline = 'Offline',
-	/** Showing curated, pre-defined RP slides. */
-	Slides = 'Slides',
-	Timer = 'Timer',
+	StoryPageChanged = 'storyPageChanged',
+	RefreshStoryPage = 'refreshStoryPage',
+	GoToStoryPage = 'goToStoryPage',
+	NextStoryPage = 'nextStoryPage',
+	PreviousStoryPage = 'previousStoryPage',
 }

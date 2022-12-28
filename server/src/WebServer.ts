@@ -1,8 +1,11 @@
 import cors from 'cors';
 import { Socket } from 'socket.io';
 import { ExpressInstance, HttpInstance, WebSocketInstance } from '.';
-import { ElectroDmConfig } from '../../shared/src/index';
-import { PresentationMode, SocketEvents } from '../../shared/src/SocketEvents';
+import {
+	ElectroDmConfig,
+	PresentationMode,
+	SocketEvents
+} from '../../shared/src';
 import { PlayerLogic } from './PlayerLogic';
 import { SerialLogic } from './SerialLogic';
 
@@ -44,7 +47,7 @@ export class WebServer {
 				return;
 			}
 
-			const nTime = parseInt(time as string);
+			const nTime = parseInt(time as string, undefined);
 			if (Number.isNaN(nTime)) {
 				res.status(400);
 				res.send(
@@ -55,6 +58,37 @@ export class WebServer {
 
 			this.playerLogic.onAddTime(nTime);
 			res.send('Time added.');
+		});
+
+		ExpressInstance.get('/setPage', async (req, res) => {
+			const page = req.query.page;
+			if (!page) {
+				res.status(400);
+				res.send('You must provide a page URL parameter');
+				return;
+			}
+
+			const nPage = parseInt(page as string, undefined);
+			if (Number.isNaN(nPage)) {
+				res.status(400);
+				res.send(
+					'Invalid page provided. Provide an page number starting with 0.'
+				);
+				return;
+			}
+
+			this.playerLogic.onGoToPage(nPage);
+			res.send('Went to page ' + nPage);
+		});
+
+		ExpressInstance.get('/nextPage', async (req, res) => {
+			this.playerLogic.onNextPage();
+			res.send('Went to next page.');
+		});
+
+		ExpressInstance.get('/previousPage', async (req, res) => {
+			this.playerLogic.onPreviousPage();
+			res.send('Went to previous page.');
 		});
 
 		ExpressInstance.get('/setScene', async (req, res) => {
@@ -130,6 +164,10 @@ export class WebServer {
 
 			socket.on(SocketEvents.RefreshTime, () => {
 				this.playerLogic.onRefreshTime(socket);
+			});
+
+			socket.on(SocketEvents.RefreshStoryPage, () => {
+				this.playerLogic.onRefreshPage(socket);
 			});
 
 			socket.on(SocketEvents.RefreshScene, () => {
