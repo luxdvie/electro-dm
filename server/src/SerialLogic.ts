@@ -103,7 +103,7 @@ export class SerialLogic {
 		try {
 			this.instance.write(`${command}\n`, 'ascii');
 		} catch (err) {
-			console.log('Could not write serial command', JSON.stringify(err));
+			console.error('Could not write serial command', JSON.stringify(err));
 		}
 	};
 }

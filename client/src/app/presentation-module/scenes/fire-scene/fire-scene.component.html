@@ -1,5 +1,5 @@
 <div class="scene-transition" [class.showing]="showing">
-	<video autoplay loop muted>
+	<video *ngIf="showing" autoplay loop muted>
 		<source [src]="clientUrl + '/assets/scenes/Fire.mp4'" type="video/mp4" />
 	</video>
 </div>

@@ -36,6 +36,27 @@ export class WebServer {
 			}
 		});
 
+		ExpressInstance.get('/addTime', async (req, res) => {
+			const time = req.query.time;
+			if (!time) {
+				res.status(400);
+				res.send('You must provide a time URL parameter');
+				return;
+			}
+
+			const nTime = parseInt(time as string);
+			if (Number.isNaN(nTime)) {
+				res.status(400);
+				res.send(
+					'Invalid time provided. Provide an integer representing milliseconds.'
+				);
+				return;
+			}
+
+			this.playerLogic.onAddTime(nTime);
+			res.send('Time added.');
+		});
+
 		ExpressInstance.get('/setScene', async (req, res) => {
 			const scene = req.query.scene;
 			if (!scene) {
@@ -107,9 +128,15 @@ export class WebServer {
 				this.playerLogic.onNewPlayers
 			);
 
+			socket.on(SocketEvents.RefreshTime, () => {
+				this.playerLogic.onRefreshTime(socket);
+			});
+
 			socket.on(SocketEvents.RefreshScene, () => {
 				this.playerLogic.onRefreshScene(socket);
 			});
+
+			socket.on(SocketEvents.AddTime, this.playerLogic.onAddTime);
 
 			socket.on(SocketEvents.SetScene, this.playerLogic.onSetScene);
 

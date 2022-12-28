@@ -62,25 +62,15 @@ export class InitiativeTrackerComponent implements OnInit {
 		private elementRef: ElementRef
 	) {
 		this.battleService.currentPlayer$.subscribe((player) => {
-			this.nextPlayerName = undefined;
-
 			this.currentPlayer = player;
 			this.showDM = this.currentPlayer?.playerType === PlayerType.DM;
-
-			if (this.currentPlayer) {
-				let nextUpIndex = this.battleService.currentPlayerIndex! + 1;
-				if (nextUpIndex >= this.allPlayers.length) {
-					nextUpIndex = 0;
-				}
-
-				const nextPlayer = this.allPlayers[nextUpIndex];
-				if (nextPlayer.playerType === PlayerType.DM) {
-					this.nextPlayerName = 'DM!';
-				} else {
-					this.nextPlayerName = nextPlayer.name;
-				}
-			}
 		});
+
+		this.battleService.nextPlayerName$.subscribe(
+			(nextName: string | undefined) => {
+				this.nextPlayerName = nextName;
+			}
+		);
 
 		this.socketService
 			.fromEvent(SocketEvents.PlayersChanged)
@@ -114,7 +104,7 @@ export class InitiativeTrackerComponent implements OnInit {
 	ngOnInit(): void {
 		setTimeout(() => {
 			this.showing = true;
-		}, 1000);
+		}, 0);
 
 		setTimeout(() => {
 			this.viewService.setFullScreen(true);

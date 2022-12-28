@@ -9,6 +9,13 @@ export enum SocketEvents {
 	SceneChanged = 'sceneChanged',
 	SetScene = 'setScene',
 	RefreshScene = 'refreshScenes',
+
+	/** Fired when the server updates the time remaining in timer mode. */
+	TimerUpdated = 'timerUpdated',
+	TimerFinished = 'timerFinished',
+	/** Fired when a client updates how much time is remaining in timer mode. */
+	AddTime = 'addTime',
+	RefreshTime = 'refreshTime',
 }
 
 export enum PresentationMode {
@@ -20,4 +27,5 @@ export enum PresentationMode {
 	Offline = 'Offline',
 	/** Showing curated, pre-defined RP slides. */
 	Slides = 'Slides',
+	Timer = 'Timer',
 }

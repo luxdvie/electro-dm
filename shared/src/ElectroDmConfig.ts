@@ -3,6 +3,7 @@
 ******/
 export const NUM_LEDS = 362;
 export const IP_ADDRESS = '192.168.1.144'; // The IP Address of the server.
+export const DEFAULT_BREAK_TIME_MS = 5 * 60 * 1000; // The default time to allocate when you schedule a 'break' (5 Minutes)
 export const STARTING_PLAYERS: StartingPlayer[] = [
 	{
 		name: 'Frances',

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectroDmConfig } from '../../../../../../shared/src';
 
+let hasBeenLoaded: boolean = false;
+
 @Component({
 	selector: 'fire-scene',
 	templateUrl: './fire-scene.component.html',
@@ -14,8 +16,12 @@ export class FireSceneComponent implements OnInit {
 	constructor() {}
 	showing: boolean = false;
 	ngOnInit(): void {
-		setTimeout(() => {
-			this.showing = true;
-		}, 1000);
+		setTimeout(
+			() => {
+				hasBeenLoaded = true;
+				this.showing = true;
+			},
+			hasBeenLoaded ? 50 : 0
+		);
 	}
 }

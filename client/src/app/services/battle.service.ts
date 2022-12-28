@@ -16,6 +16,11 @@ export class BattleService {
 	private _currentPlayer = new BehaviorSubject<Player | undefined>(undefined);
 	currentPlayer$ = this._currentPlayer.asObservable();
 
+	private _nextPlayerName = new BehaviorSubject<string | undefined>(
+		undefined
+	);
+	nextPlayerName$ = this._nextPlayerName.asObservable();
+
 	private _players: Player[] = [];
 	get players() {
 		return this._players;
@@ -41,8 +46,31 @@ export class BattleService {
 
 		if (this._currentPlayerIndex === undefined) {
 			this._currentPlayer.next(undefined);
+			this._nextPlayerName.next(undefined);
 		} else {
-			this._currentPlayer.next(this.players[this._currentPlayerIndex]);
+			const thisPlayer = this.players[this._currentPlayerIndex];
+			this._currentPlayer.next(thisPlayer);
+
+			if (thisPlayer) {
+				let nextUpIndex = this._currentPlayerIndex + 1;
+				if (nextUpIndex >= this.players.length) {
+					nextUpIndex = 0;
+				}
+
+				const nextPlayer = this.players[nextUpIndex];
+				if (!nextPlayer) {
+					this._nextPlayerName.next(undefined);
+					return;
+				}
+
+				if (nextPlayer.playerType === PlayerType.DM) {
+					this._nextPlayerName.next('DM!');
+				} else {
+					this._nextPlayerName.next(nextPlayer.name);
+				}
+			} else {
+				this._nextPlayerName.next(undefined);
+			}
 		}
 	}
 

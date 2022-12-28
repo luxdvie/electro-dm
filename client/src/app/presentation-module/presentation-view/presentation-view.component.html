@@ -1,3 +1,39 @@
 <initiative-tracker *ngIf="scene === 'Initiative'"></initiative-tracker>
 <fire-scene *ngIf="scene === 'FireScene'"></fire-scene>
 <div *ngIf="scene === 'Offline'" class="offline"></div>
+<div *ngIf="scene === 'Timer'" class="time">
+	<div class="time-container"
+		[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/bg.jpeg)' }">
+		<div class="bgFull sci-fi-font" [class.show]="true"
+			[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/paper.jpeg)' }">
+			<span class="a" *ngIf="timeIsUp">
+				Break finished....
+			</span>
+			<span *ngIf="!timeIsUp" class="a"><!-- See you -->
+				{{ timeRemainingFormatted | date:'m:ss' }}
+				<!-- <ng-container *ngIf="seeYouSoon">
+					soon!
+				</ng-container>
+				<ng-container *ngIf="!seeYouSoon">
+					in <span *ngIf="timeRemainingFormatted.getMinutes()> 1">
+						{{ timeRemainingFormatted | date:'m' }} minutes, </span>
+					<span *ngIf="timeRemainingFormatted.getMinutes() === 1">
+						{{ timeRemainingFormatted | date:'m' }} minute, </span>
+					{{ timeRemainingFormatted | date:'s' }} seconds!
+				</ng-container> -->
+
+			</span>
+			<!-- <img [src]="clientUrl + '/assets/order-tracker/dice-t.webp'"> -->
+		</div>
+
+	</div>
+
+	<div class="hourglass-container">
+		<div class="hourglass">
+			<div class="top"></div>
+			<div class="bottom"></div>
+		</div>
+	</div>
+
+
+</div>
