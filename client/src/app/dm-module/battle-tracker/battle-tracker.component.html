@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/bg.jpeg)' }">
 	<div class="header">
 		<button mat-raised-button color="primary" (click)="addChar()">Add DM Character</button>&nbsp;
 		<button mat-raised-button color="accent" (click)="startOrNext()">
@@ -7,7 +7,34 @@
 		<button mat-raised-button color="warn" (click)="reset()">Reset</button>
 	</div>
 	<div class="body">
-		<div class="player" *ngFor="let player of players; let i = index"
+		<mat-card class="player-card" *ngFor="let player of players; let i = index"
+			[class.current-player]="currentPlayerIndex === i">
+			<mat-card-header>
+				<div mat-card-avatar class="header-image" [class.light]="player.image === 'unknown.png'"
+					[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/profile/' + player.image + ' )' }">
+				</div>
+				<mat-card-title><a [href]="player.link" class="player-link sci-fi-font"
+						target="_blank">{{player.name}}</a></mat-card-title>
+				<mat-card-subtitle class="sci-fi-font">{{player.race}} {{player.playerClass}}</mat-card-subtitle>
+			</mat-card-header>
+			<mat-card-content class="card-content">
+				<p [innerHtml]="player.dmNotes">
+				</p>
+				<div class="init sci-fi-font" [class.current-player]="currentPlayerIndex === i">
+					<input [attr.data-player]="player.name" (focus)="selectOnFocus($event, player);"
+						(blur)="focusedPlayer = null" matInput
+						[class.focused]="focusedPlayer && focusedPlayer.name === player.name"
+						(change)="orderPlayers(player)" [(ngModel)]="player.initiative" type="number"
+						(keydown.enter)="onEnterKeydown($event, player)" (keydown.tab)="onTabKeydown($event, player)"
+						class="sci-fi-font">
+				</div>
+			</mat-card-content>
+			<!-- <mat-card-actions>
+				<button mat-button>Highlight?</button>
+			</mat-card-actions> -->
+		</mat-card>
+
+		<!-- <div class="player" *ngFor="let player of players; let i = index"
 			[class.current-player]="currentPlayerIndex === i">
 			<span class="icon">
 				<img *ngIf="player.image" [src]="'/assets/profile/' + player.image" class="profile-pic" />
@@ -24,6 +51,6 @@
 				<input (focus)="selectOnFocus($event)" matInput (change)="orderPlayers()"
 					[(ngModel)]="player.initiative" type="number">
 			</mat-form-field>
-		</div>
+		</div> -->
 	</div>
 </div>

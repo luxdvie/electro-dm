@@ -7,6 +7,7 @@ import {
 	PlayerType,
 	SocketEvents
 } from '../../../../shared/src';
+import { PlayerClass, PlayerRace } from '../../../../shared/src/PlayerClass';
 import { SocketServiceService } from './socket-service.service';
 
 @Injectable({
@@ -122,8 +123,12 @@ export class BattleService {
 					new Player(
 						startingPlayer.name,
 						startingPlayer.seat,
-						startingPlayer.image,
-						PlayerType.Player
+						startingPlayer.image || 'unknown.png',
+						startingPlayer.race,
+						startingPlayer.playerClass,
+						PlayerType.Player,
+						startingPlayer.link,
+						startingPlayer.dmNotes || ' '
 					)
 			)
 		);
@@ -148,7 +153,16 @@ export class BattleService {
 		const name = window.prompt('Enter character name:');
 		if (name) {
 			this.players.push(
-				new Player(name, ElectroDmConfig.dmSeat, PlayerType.DM)
+				new Player(
+					name,
+					ElectroDmConfig.dmSeat,
+					'dm.png',
+					PlayerRace.Goblin,
+					PlayerClass.Fighter,
+					PlayerType.DM,
+					'https://www.dndbeyond.com/monsters',
+					'dm character'
+				)
 			);
 		}
 
@@ -156,14 +170,14 @@ export class BattleService {
 	}
 
 	orderPlayers() {
-		this.setPlayers(
-			this.players.sort((a: Player, b: Player) =>
-				a.initiative > b.initiative
-					? -1
-					: a.initiative < b.initiative
-					? 1
-					: 0
-			)
-		);
+		this.setPlayers(this.players.sort(BattleService.sortByInit));
 	}
+
+	static sortByInit = (a: Player, b: Player) => {
+		return a.initiative > b.initiative
+			? -1
+			: a.initiative < b.initiative
+			? 1
+			: 0;
+	};
 }

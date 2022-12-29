@@ -1,14 +1,16 @@
+import { PlayerClass, PlayerRace } from './PlayerClass';
+
 export enum Condition {
-	Paralyzed = "Paralyzed",
-	Asleep = "Asleep",
-	Poisoned = "Poisoned",
-	Normal = "Normal",
-	Concentration = "Concentration",
+	Paralyzed = 'Paralyzed',
+	Asleep = 'Asleep',
+	Poisoned = 'Poisoned',
+	Normal = 'Normal',
+	Concentration = 'Concentration',
 }
 
 export enum PlayerType {
-	Player = "Player",
-	DM = "DM",
+	Player = 'Player',
+	DM = 'DM',
 }
 
 export class Player {
@@ -19,12 +21,20 @@ export class Player {
 	seat: number = 0;
 	image: string | null = null;
 	backgroundOffset: number;
+	race: PlayerRace;
+	playerClass: PlayerClass;
+	link: string | null = null;
+	dmNotes: string | null = null;
 
 	constructor(
 		name: string,
 		seat: number,
 		image: string | null,
-		type: PlayerType = PlayerType.DM
+		race: PlayerRace,
+		playerClass: PlayerClass,
+		type: PlayerType = PlayerType.DM,
+		link: string | null = null,
+		dmNotes: string | null = null
 	) {
 		this.name = name;
 		this.initiative = 0;
@@ -32,6 +42,10 @@ export class Player {
 		this.seat = seat;
 		this.image = image;
 		this.backgroundOffset = 0;
+		this.race = race;
+		this.playerClass = playerClass;
+		this.link = link;
+		this.dmNotes = dmNotes;
 	}
 
 	setInitiative(value: number) {

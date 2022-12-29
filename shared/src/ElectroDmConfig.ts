@@ -1,3 +1,5 @@
+import { PlayerClass, PlayerRace } from './PlayerClass';
+
 /******
 	! Change these value to match your setup!
 ******/
@@ -9,26 +11,56 @@ export const STARTING_PLAYERS: StartingPlayer[] = [
 		name: 'Frances',
 		seat: 0,
 		image: null,
+		race: PlayerRace.Kender,
+		playerClass: PlayerClass.Cleric,
+		link: 'https://www.dndbeyond.com/characters/90780383',
+		dmNotes: `
+			Give Frances a challenging problem or interesting story.
+		`,
 	},
 	{
 		name: 'Sandra Ravage',
 		seat: 1,
 		image: 'tyler.jpeg',
+		race: PlayerRace.Bugbear,
+		playerClass: PlayerClass.Barbarian,
+		link: 'https://www.dndbeyond.com/characters/89965980',
+		dmNotes: `
+			Tyler wants to be able to rage and bw WWE cool.
+		`,
 	},
 	{
 		name: 'Drip',
 		seat: 2,
 		image: 'zach.jpeg',
+		race: PlayerRace.Plasmoid,
+		playerClass: PlayerClass.Fighter,
+		link: 'https://www.dndbeyond.com/characters/23432572',
+		dmNotes: `
+			Zach wants to slime through walls.
+		`,
 	},
 	{
 		name: 'Angelica',
 		seat: 3,
 		image: 'bgreen.jpeg',
+		race: PlayerRace.Fairy,
+		playerClass: PlayerClass.Sorcerer,
+		link: 'https://www.dndbeyond.com/characters/71815075',
+		dmNotes: `
+			What does BGreen want to do with Angelic?
+		`,
 	},
 	{
 		name: 'Nathan',
 		seat: 4,
 		image: null,
+		race: PlayerRace.RockGnome,
+		playerClass: PlayerClass.Barbarian,
+		link: null,
+		dmNotes: `
+			Let Nathan shoot stuff.
+		`,
 	},
 ];
 
@@ -78,4 +110,8 @@ interface StartingPlayer {
 	 * put that filename here.
 	 */
 	image: string | null;
+	link: string | null;
+	dmNotes: string | null;
+	race: PlayerRace;
+	playerClass: PlayerClass;
 }
