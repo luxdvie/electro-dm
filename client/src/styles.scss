@@ -7,10 +7,11 @@ body {
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
+	background-image: url('/assets/order-tracker/bg.jpeg');
 }
 body {
 	margin: 0;
-	font-family: Roboto, "Helvetica Neue", sans-serif;
+	font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .sci-fi-font {
@@ -18,7 +19,7 @@ body {
 }
 
 * {
-	box-sizing: border-box
+	box-sizing: border-box;
 }
 
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';

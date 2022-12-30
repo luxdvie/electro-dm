@@ -7,7 +7,6 @@ import {
 	PlayerType,
 	SocketEvents
 } from '../../../../shared/src';
-import { PlayerClass, PlayerRace } from '../../../../shared/src/PlayerClass';
 import { DBService } from './db.service';
 import { SocketServiceService } from './socket-service.service';
 
@@ -43,13 +42,18 @@ export class BattleService {
 	setCurrentPlayer(value: number | undefined, broadcast: boolean = true) {
 		this._currentPlayerIndex = value;
 		if (broadcast) {
-			this.socketService.send('currentPlayerIndex', value);
+			this.socketService.send(
+				SocketEvents.CurrentPlayerIndexReceived,
+				value
+			);
 		}
 
 		if (this._currentPlayerIndex === undefined) {
 			this._currentPlayer.next(undefined);
 			this._nextPlayerName.next(undefined);
+			this._battleActive.next(false);
 		} else {
+			this._battleActive.next(true);
 			const thisPlayer = this.players[this._currentPlayerIndex];
 			this._currentPlayer.next(thisPlayer);
 
@@ -124,9 +128,12 @@ export class BattleService {
 
 		this.sendCommand(Commands.Off);
 		this.setPlayers(players);
-
 		this.setCurrentPlayer(undefined, true);
+		this._battleActive.next(false);
 	}
+
+	private _battleActive = new BehaviorSubject(false);
+	battleActive$ = this._battleActive.asObservable();
 
 	startOrNext() {
 		setTimeout(() => {
@@ -137,27 +144,15 @@ export class BattleService {
 			this.setCurrentPlayer(this.currentPlayerIndex! + 1, true);
 			if (this.currentPlayerIndex! >= this.players.length) {
 				this.setCurrentPlayer(0, true);
+				this._battleActive.next(true);
+			} else {
+				this._battleActive.next(false);
 			}
 		}, 50);
 	}
 
-	addChar() {
-		const name = window.prompt('Enter character name:');
-		if (name) {
-			this.players.push(
-				Player.makePlayer({
-					name: 'New Player ' + (this.players.length + 1),
-					seat: ElectroDmConfig.dmSeat,
-					image: 'dm.png',
-					race: PlayerRace.Goblin,
-					playerClass: PlayerClass.Fighter,
-					playerType: PlayerType.DM,
-					link: 'https://www.dndbeyond.com/monsters',
-					dmNotes: 'dm character',
-				})
-			);
-		}
-
+	addChar(player: Player) {
+		this.players.push(player);
 		this.setPlayers(this.players, true);
 	}
 

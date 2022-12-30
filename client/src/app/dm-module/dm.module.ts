@@ -24,6 +24,7 @@ import { LEDComponent } from './led/led/led.component';
 import { NotesComponent } from './notes/notes.component';
 import { PlayerConfigComponent } from './player-config/player-config.component';
 import { SceneManagerComponent } from './scene-manager/scene-manager.component';
+import { SceneToolbarComponent } from './scene-toolbar/scene-toolbar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
@@ -94,6 +95,7 @@ const routes: Routes = [
 		PlayerConfigComponent,
 		WelcomeComponent,
 		SceneManagerComponent,
+		SceneToolbarComponent,
 	],
 })
 export class DmModule {}

@@ -4,8 +4,10 @@ import { SocketServiceService } from 'src/app/services/socket-service.service';
 import {
 	DMBannerImages,
 	ElectroDmConfig,
-	Player
+	Player,
+	PlayerType
 } from '../../../../../shared/src';
+import { PlayerClass, PlayerRace } from '../../../../../shared/src/PlayerClass';
 
 @Component({
 	selector: 'app-battle-tracker',
@@ -16,6 +18,8 @@ export class BattleTrackerComponent implements OnInit {
 	get clientUrl(): string {
 		return ElectroDmConfig.clientUrl;
 	}
+
+	isBattleActive: boolean = false;
 
 	dmImages = Object.keys(DMBannerImages).map((key) => {
 		return {
@@ -37,7 +41,11 @@ export class BattleTrackerComponent implements OnInit {
 		private socketService: SocketServiceService
 	) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.battleService.battleActive$.subscribe((isActive) => {
+			this.isBattleActive = isActive;
+		});
+	}
 
 	focusTo: Player | null = null;
 
@@ -101,6 +109,47 @@ export class BattleTrackerComponent implements OnInit {
 	}
 
 	addChar() {
-		this.battleService.addChar();
+		this.battleService.addChar(
+			Player.makePlayer({
+				name: 'DM Player ' + (this.players.length + 1),
+				seat: ElectroDmConfig.dmSeat,
+				image: 'dm.png',
+				race: PlayerRace.Orc,
+				playerClass: PlayerClass.Barbarian,
+				playerType: PlayerType.DM,
+				link: 'https://www.dndbeyond.com/monsters',
+				dmNotes: 'dm character',
+			})
+		);
+	}
+
+	addGoblin() {
+		this.battleService.addChar(
+			Player.makePlayer({
+				name: 'Goblin ' + (this.players.length + 1),
+				seat: ElectroDmConfig.dmSeat,
+				image: 'troll.png',
+				bannerImage: DMBannerImages.Troll,
+				race: PlayerRace.Goblin,
+				playerClass: PlayerClass.Fighter,
+				playerType: PlayerType.DM,
+				link: 'https://www.dndbeyond.com/monsters',
+				dmNotes: 'dm character',
+			})
+		);
+	}
+
+	deletePlayer(player: Player) {
+		if (
+			confirm(
+				`Are you sure you want to delete ${player.name}. This cannot be undone.`
+			)
+		) {
+			const deleteAt = this.players.findIndex((p) => p.id === player.id);
+			if (deleteAt > -1) {
+				this.players.splice(deleteAt, 1);
+				this.battleService.setPlayers(this.players);
+			}
+		}
 	}
 }
