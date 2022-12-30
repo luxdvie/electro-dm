@@ -16,5 +16,11 @@
 	"bugs": {
 		"url": "https://github.com/luxdvie/electro-dm/issues"
 	},
-	"homepage": "https://github.com/luxdvie/electro-dm#readme"
+	"homepage": "https://github.com/luxdvie/electro-dm#readme",
+	"dependencies": {
+		"uuid": "^9.0.0"
+	},
+	"devDependencies": {
+		"@types/uuid": "^9.0.0"
+	}
 }

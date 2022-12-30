@@ -20,10 +20,25 @@
 			<mat-card-content class="card-content">
 				<p [innerHtml]="player.dmNotes">
 				</p>
+				<div class="dm-banner" *ngIf="player.playerType === 'DM'">
+					<mat-form-field appearance="fill">
+						<mat-label>DM Icon:</mat-label>
+						<select matNativeControl [(ngModel)]="player.bannerImage" name="bannerImage"
+							(change)="onChangeImage()">
+							<option value="" selected></option>
+							<option *ngFor="let image of dmImages" [value]="image.value">
+								{{image.viewValue}}
+							</option>
+						</select>
+					</mat-form-field>
+					<div *ngIf="player.bannerImage" class="banner-preview">
+						<img [src]="clientUrl + '/assets/' + player.bannerImage">
+					</div>
+				</div>
 				<div class="init sci-fi-font" [class.current-player]="currentPlayerIndex === i">
 					<input [attr.data-player]="player.name" (focus)="selectOnFocus($event, player);"
 						(blur)="focusedPlayer = null" matInput
-						[class.focused]="focusedPlayer && focusedPlayer.name === player.name"
+						[class.focused]="focusedPlayer && focusedPlayer.id === player.id"
 						(change)="orderPlayers(player)" [(ngModel)]="player.initiative" type="number"
 						(keydown.enter)="onEnterKeydown($event, player)" (keydown.tab)="onTabKeydown($event, player)"
 						class="sci-fi-font">

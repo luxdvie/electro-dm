@@ -8,6 +8,7 @@ import {
 	SocketEvents
 } from '../../../../shared/src';
 import { PlayerClass, PlayerRace } from '../../../../shared/src/PlayerClass';
+import { DBService } from './db.service';
 import { SocketServiceService } from './socket-service.service';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class BattleService {
 	private _currentPlayer = new BehaviorSubject<Player | undefined>(undefined);
 	currentPlayer$ = this._currentPlayer.asObservable();
 
-	private _nextPlayerName = new BehaviorSubject<string | undefined>(
+	private _nextPlayerName = new BehaviorSubject<string | undefined | null>(
 		undefined
 	);
 	nextPlayerName$ = this._nextPlayerName.asObservable();
@@ -83,15 +84,18 @@ export class BattleService {
 		return undefined;
 	}
 
-	constructor(private socketService: SocketServiceService) {
+	constructor(
+		private socketService: SocketServiceService,
+		private dbService: DBService
+	) {
 		this.socketService
-			.fromEvent('playersChanged')
+			.fromEvent(SocketEvents.PlayersChanged)
 			.subscribe((newPlayers: any) => {
 				this.setPlayers(newPlayers as Player[], false);
 			});
 
 		this.socketService
-			.fromEvent('currentPlayerIndexChanged')
+			.fromEvent(SocketEvents.PlayerIndexChanged)
 			.subscribe((value: any) => {
 				if (value === null || value === undefined) {
 					this.setCurrentPlayer(undefined, false);
@@ -110,28 +114,16 @@ export class BattleService {
 		window.fetch(`${ElectroDmConfig.apiUrl}/send?command=${command}`);
 	}
 
-	reset() {
+	async reset(): Promise<void> {
+		const players = await this.dbService.getPlayers();
+
 		this.socketService.send(SocketEvents.ConfigureServer, {
 			numLEDs: ElectroDmConfig.numLEDs,
-			numPlayers: ElectroDmConfig.numPlayers(),
+			numPlayers: players.length,
 		});
 
 		this.sendCommand(Commands.Off);
-		this.setPlayers(
-			ElectroDmConfig.startingPlayers.map(
-				(startingPlayer) =>
-					new Player(
-						startingPlayer.name,
-						startingPlayer.seat,
-						startingPlayer.image || 'unknown.png',
-						startingPlayer.race,
-						startingPlayer.playerClass,
-						PlayerType.Player,
-						startingPlayer.link,
-						startingPlayer.dmNotes || ' '
-					)
-			)
-		);
+		this.setPlayers(players);
 
 		this.setCurrentPlayer(undefined, true);
 	}
@@ -153,16 +145,16 @@ export class BattleService {
 		const name = window.prompt('Enter character name:');
 		if (name) {
 			this.players.push(
-				new Player(
-					name,
-					ElectroDmConfig.dmSeat,
-					'dm.png',
-					PlayerRace.Goblin,
-					PlayerClass.Fighter,
-					PlayerType.DM,
-					'https://www.dndbeyond.com/monsters',
-					'dm character'
-				)
+				Player.makePlayer({
+					name: 'New Player ' + (this.players.length + 1),
+					seat: ElectroDmConfig.dmSeat,
+					image: 'dm.png',
+					race: PlayerRace.Goblin,
+					playerClass: PlayerClass.Fighter,
+					playerType: PlayerType.DM,
+					link: 'https://www.dndbeyond.com/monsters',
+					dmNotes: 'dm character',
+				})
 			);
 		}
 

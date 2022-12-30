@@ -37,7 +37,7 @@ export class InitiativeTrackerComponent implements OnInit {
 
 	players: Player[] = [];
 	allPlayers: Player[] = [];
-	nextPlayerName: string | undefined;
+	nextPlayerName: string | undefined | null;
 	rowHeight: number = 50;
 	get numPlayers() {
 		return this.players.length;
@@ -69,7 +69,7 @@ export class InitiativeTrackerComponent implements OnInit {
 		});
 
 		this.battleService.nextPlayerName$.subscribe(
-			(nextName: string | undefined) => {
+			(nextName: string | undefined | null) => {
 				this.nextPlayerName = nextName;
 			}
 		);

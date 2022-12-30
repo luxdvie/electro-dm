@@ -3,11 +3,14 @@
 		<div class="bgFull sci-fi-font" [class.show]="showDM"
 			[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/paper.jpeg)' }">
 			<span class="a">DM's Turn!</span>
-			<img [src]="clientUrl + '/assets/order-tracker/dice-t.webp'">
+			<img *ngIf="currentPlayer && currentPlayer.playerType === 'DM' && !currentPlayer.bannerImage"
+				[src]="clientUrl + '/assets/order-tracker/dice-t.webp'">
+			<img class="banner" *ngIf="currentPlayer && currentPlayer.bannerImage"
+				[src]="clientUrl + '/assets/' + currentPlayer.bannerImage">
 			<span class="b" *ngIf="nextPlayerName">Up next: {{nextPlayerName}}</span>
 		</div>
 
-		<div [style.height.px]="rowHeight" class="row" [class.current]="player.name === currentPlayer?.name"
+		<div [style.height.px]="rowHeight" class="row" [class.current]="player.id === currentPlayer?.id"
 			*ngFor="let player of players; let i = index">
 			<div class="svg-container">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 241 34"
@@ -32,7 +35,7 @@
 			<div class="bg" [style.background-position-x.px]="player.backgroundOffset"
 				[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/paper.jpeg)' }">
 			</div>
-			<div *ngIf="player.name === currentPlayer?.name" class="bgFiller">
+			<div *ngIf="player.id === currentPlayer?.id" class="bgFiller">
 			</div>
 		</div>
 	</div>

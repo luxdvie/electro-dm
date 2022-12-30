@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { PlayerClass, PlayerRace } from './PlayerClass';
 
 export enum Condition {
@@ -14,60 +15,49 @@ export enum PlayerType {
 }
 
 export class Player {
-	name: string;
-	initiative: number;
-	conditions: Condition[] = [];
-	playerType: PlayerType;
-	seat: number = 0;
-	image: string | null = null;
-	backgroundOffset: number;
-	race: PlayerRace;
-	playerClass: PlayerClass;
+	// Editable Properties
+	name: string | null = null;
+	seat: number | null = null;
+	image: string | null = 'unknown.png';
+	bannerImage: string | null = null;
+	race: PlayerRace = PlayerRace.Human;
+	playerClass: PlayerClass = PlayerClass.Monk;
 	link: string | null = null;
 	dmNotes: string | null = null;
 
-	constructor(
-		name: string,
-		seat: number,
-		image: string | null,
-		race: PlayerRace,
-		playerClass: PlayerClass,
-		type: PlayerType = PlayerType.DM,
-		link: string | null = null,
-		dmNotes: string | null = null
-	) {
-		this.name = name;
-		this.initiative = 0;
-		this.playerType = type;
-		this.seat = seat;
-		this.image = image;
-		this.backgroundOffset = 0;
-		this.race = race;
-		this.playerClass = playerClass;
-		this.link = link;
-		this.dmNotes = dmNotes;
+	initiative: number = 0;
+	playerType: PlayerType = PlayerType.Player;
+	backgroundOffset: number = 0;
+	id: string | null = null;
+
+	static makePlayer(playerInfo: Partial<Player>): Player {
+		const player = new Player();
+		Object.assign(player, playerInfo);
+
+		return Player.addMissingInfo(player);
 	}
+
+	private static addMissingInfo(player: Player): Player {
+		player.id = player.id || uuid();
+		player.image = player.image || 'unknown.png';
+		return player;
+	}
+
+	static fromJSON(playerJson: string) {
+		const playerLike = JSON.parse(playerJson);
+		const player = new Player();
+		Object.assign(player, playerLike);
+
+		return Player.addMissingInfo(player);
+	}
+
+	private constructor() {}
 
 	setInitiative(value: number) {
 		this.initiative = value;
 	}
 
 	reset() {
-		this.conditions = [];
 		this.setInitiative(0);
-	}
-
-	addCondition(condition: Condition) {
-		if (this.conditions.indexOf(condition) === -1) {
-			this.conditions.push(condition);
-		}
-	}
-
-	removeCondition(condition: Condition) {
-		const index = this.conditions.findIndex((c) => c === condition);
-		if (index > -1) {
-			this.conditions.splice(index, 1);
-			this.conditions = this.conditions;
-		}
 	}
 }

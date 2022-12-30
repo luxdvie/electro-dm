@@ -9,7 +9,7 @@ import { ViewServiceService } from 'src/app/services/view-service.service';
 	styleUrls: ['./dm-view.component.scss'],
 })
 export class DmViewComponent implements OnInit {
-	links = ['Battle', 'Notes', 'Led'];
+	links = ['Battle', 'Notes', 'Player Config', 'Led'];
 
 	fullScreen: boolean = false;
 

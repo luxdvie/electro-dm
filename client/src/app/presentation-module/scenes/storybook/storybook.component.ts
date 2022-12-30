@@ -86,10 +86,8 @@ export class StorybookComponent implements OnInit {
 
 					if (this.page !== undefined && this.page > nPage) {
 						this.direction = TurnDirection.Left;
-						console.log('turning left');
 					} else {
 						this.direction = TurnDirection.Right;
-						console.log('turning right');
 					}
 
 					this.page = nPage;

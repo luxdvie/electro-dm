@@ -19,7 +19,7 @@ export const STARTING_PLAYERS: StartingPlayer[] = [
 		`,
 	},
 	{
-		name: 'Sandra Ravage',
+		name: 'Cassandra Ravage',
 		seat: 1,
 		image: 'tyler.jpeg',
 		race: PlayerRace.Bugbear,
@@ -48,7 +48,7 @@ export const STARTING_PLAYERS: StartingPlayer[] = [
 		playerClass: PlayerClass.Sorcerer,
 		link: 'https://www.dndbeyond.com/characters/71815075',
 		dmNotes: `
-			What does BGreen want to do with Angelic?
+			What does BGreen want to do with Angelica?
 		`,
 	},
 	{
@@ -84,10 +84,6 @@ export const ElectroDmConfig = {
 	apiUrl: `http://${IP_ADDRESS}:${SERVER_PORT}`,
 	clientUrl: `http://${IP_ADDRESS}:${CLIENT_PORT}`,
 	dmSeat: 998,
-	startingPlayers: STARTING_PLAYERS,
-	numPlayers: () => {
-		return ElectroDmConfig.startingPlayers.length;
-	},
 };
 
 export enum Commands {

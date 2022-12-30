@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
-import { ElectroDmConfig, Player } from '../../../../../shared/src';
+import {
+	DMBannerImages,
+	ElectroDmConfig,
+	Player
+} from '../../../../../shared/src';
 
 @Component({
 	selector: 'app-battle-tracker',
@@ -12,6 +16,13 @@ export class BattleTrackerComponent implements OnInit {
 	get clientUrl(): string {
 		return ElectroDmConfig.clientUrl;
 	}
+
+	dmImages = Object.keys(DMBannerImages).map((key) => {
+		return {
+			viewValue: key,
+			value: (DMBannerImages as any)[key],
+		};
+	});
 
 	get players() {
 		return this.battleService.players;
@@ -27,10 +38,6 @@ export class BattleTrackerComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {}
-
-	ngAfterViewInit() {
-		console.log('at view init');
-	}
 
 	focusTo: Player | null = null;
 
@@ -81,8 +88,12 @@ export class BattleTrackerComponent implements OnInit {
 		this.battleService.orderPlayers();
 	}
 
-	reset() {
-		this.battleService.reset();
+	onChangeImage() {
+		this.battleService.setPlayers(this.players);
+	}
+
+	async reset() {
+		await this.battleService.reset();
 	}
 
 	startOrNext() {

@@ -1,0 +1,25 @@
+<div class="container" [ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/bg.jpeg)' }">
+	<div class="header">
+		<button mat-raised-button color="primary" (click)="addCharacter()">Add Player Character</button>&nbsp;
+		<span>Changing configurations will reset any active encounter.</span>
+	</div>
+	<div class="body">
+		<mat-card class="player-card" *ngFor="let player of players; let i = index">
+			<mat-card-header>
+				<div mat-card-avatar class="header-image" [class.light]="player.image === 'unknown.png'"
+					[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/profile/' + player.image + ' )' }">
+				</div>
+				<mat-card-title><a [href]="player.link" class="player-link sci-fi-font"
+						target="_blank">{{player.name}}</a></mat-card-title>
+				<mat-card-subtitle class="sci-fi-font">{{player.race}} {{player.playerClass}}</mat-card-subtitle>
+			</mat-card-header>
+			<mat-card-content class="card-content">
+				<p [innerHtml]="player.dmNotes"></p>
+			</mat-card-content>
+			<mat-card-actions align="start">
+				<button mat-button (click)="editPlayer(player)">Edit</button>
+				<button mat-button (click)="deletePlayer(player)">Delete</button>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</div>

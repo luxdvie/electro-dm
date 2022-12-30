@@ -124,9 +124,13 @@ export class PlayerLogic {
 		if (currentPlayerIndex !== undefined) {
 			const player = players[currentPlayerIndex];
 			if (player) {
-				let sCommand = 'P' + (Number(player.seat) + 1);
+				let sCommand: string = '';
 				if (player.playerType === 'DM') {
 					sCommand = 'PD';
+				} else {
+					if (!Number.isNaN(player.seat)) {
+						sCommand = 'P' + (Number(player.seat) + 1);
+					}
 				}
 
 				await this.serialLogic.sendCommand(sCommand);

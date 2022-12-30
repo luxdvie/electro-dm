@@ -1,0 +1,55 @@
+<form>
+	<section class="form-input">
+		<mat-form-field>
+			<mat-label>Name</mat-label>
+			<input name="name" matInput placeholder="Name..." [formControl]="form['name']">
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Seat (optional)</mat-label>
+			<input name="seat" type="number" matInput placeholder="Seat..." [formControl]="form['seat']">
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Image</mat-label>
+			<input name="image" matInput placeholder="Image name..." [formControl]="form['image']">
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Link</mat-label>
+			<input name="link" matInput placeholder="Link..." [formControl]="form['link']">
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Race</mat-label>
+			<input (focus)="selectOnFocus($event)" name="race" type="text" placeholder="Choose a race..." matInput
+				[formControl]="form['race']" [matAutocomplete]="auto">
+			<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+				<mat-option *ngFor="let option of filteredPlayerRaceOptions | async" [value]="option">
+					{{option}}
+				</mat-option>
+			</mat-autocomplete>
+		</mat-form-field>
+
+		<mat-form-field appearance="fill">
+			<mat-label>Class</mat-label>
+			<input (focus)="selectOnFocus($event)" name="playerClass" type="text" placeholder="Choose a class..."
+				matInput [formControl]="form['playerClass']" [matAutocomplete]="auto2">
+			<mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+				<mat-option *ngFor="let option of filteredPlayerClassOptions | async" [value]="option">
+					{{option}}
+				</mat-option>
+			</mat-autocomplete>
+		</mat-form-field>
+
+		<mat-form-field class="example-full-width">
+			<mat-label>Leave a comment</mat-label>
+			<textarea name="dmNotes" matInput [formControl]="form['dmNotes']"
+				placeholder="Notes for the DM..."></textarea>
+		</mat-form-field>
+	</section>
+
+	<section class="actions">
+		<button mat-raised-button color="primary" (click)="onSaveClick()">Save</button>
+	</section>
+</form>

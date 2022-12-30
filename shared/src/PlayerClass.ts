@@ -62,7 +62,7 @@ export enum PlayerRace {
 
 export enum PlayerClass {
 	Artificer = 'Artificer',
-	BloodHunter = 'BloodHunter',
+	BloodHunter = 'Blood Hunter',
 	Barbarian = 'Barbarian',
 	Bard = 'Bard',
 	Cleric = 'Cleric',
