@@ -2,9 +2,9 @@
 	<div class="header">
 		<button mat-raised-button color="primary" (click)="addChar()">Add DM Character</button>&nbsp;
 		<button mat-raised-button color="accent" (click)="startOrNext()">
-			{{ currentPlayerIndex === undefined ? 'Start' : 'Next' }}
+			{{ currentPlayerIndex === undefined ? 'Start Encounter' : 'Next Player' }}
 		</button>&nbsp;
-		<button mat-raised-button color="warn" (click)="reset()">Reset</button>
+		<button mat-raised-button color="warn" (click)="reset()">Reset Encounter / Reset Players</button>
 	</div>
 	<div class="body">
 		<mat-card class="player-card" *ngFor="let player of players; let i = index"

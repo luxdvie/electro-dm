@@ -27,9 +27,11 @@ $ cd electro-dm
    2. Go to `File -> Open Folder` and open the folder that Git just cloned
 5. Open `shared/src/ElectroDmConfig.ts`
    1. Set your computers IP Address to the `IP_ADDRESS` constant value
-   2. Configure your party's starting players
-   3. If you're using an LED controller, set the following:
+   2. If you're using an LED controller, set the following:
     - Set `NUM_LEDS` to how many LEDs you have
 - Run `npm run start` to start the client and server applications
 - Navigate to `{{YOUR_IP_ADDRESS}}:4200/dm` to start the DM Client app
+  - Navigate to the 'Player Config' tab to add some player characters.
+  - From there, you can go to the 'Battle' tab to start an encounter.
+    - The 'battle' tab is where you add DM characters to build out an encounter.
 - Navigate to `{{YOUR_IP_ADDRESS}}:4200` to start the Presentation Client app
