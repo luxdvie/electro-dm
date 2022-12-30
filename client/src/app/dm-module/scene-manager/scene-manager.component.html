@@ -1,0 +1,55 @@
+<div class="container" [ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/bg.jpeg)' }">
+	<div class="body">
+		<div class="bgFull sci-fi-font show">
+			<p>Choose a scene for the display on your player-facing display (iPad, TV, computer, etc.) at <a
+					[href]="clientUrl" target="_blank">{{clientUrl}}</a></p>
+			<ul>
+				<li>
+					<button mat-raised-button color="primary" (click)="goToInitiative()">Initiative
+						Tracker</button>
+					You can invoke this mode by making your Elgato Stream Deck or a script make a `GET` request to
+					the {{serverUrl}}/setScene?scene=Initiative.
+				</li>
+
+				<li>
+					<button mat-raised-button color="warn" (click)="goToFire()">Fire Mode</button>
+					You can invoke this mode by making your Elgato Stream Deck or a script make a `GET` request to
+					the {{serverUrl}}/setScene?scene=FireScene.
+				</li>
+
+				<li>
+					<button mat-raised-button color="accent" (click)="goToTimer()">Break Mode!
+					</button>
+					You can invoke this mode by making your Elgato Stream Deck or a script make a `GET` request to
+					the {{serverUrl}}/setScene?scene=Timer.
+
+					<ul>
+						<li>
+							<button mat-raised-button color="accent" (click)="addFiveMins()">Add 5 Minutes to the
+								break!
+							</button>
+							You can add time (in milliseconds) to your current break by making your Elgato Stream Deck
+							or a script make a `GET` request to
+							the {{serverUrl}}/addTime?time=300000. You can replace '300000' with whatever value you
+							wish.
+						</li>
+						<li>
+							<button mat-raised-button color="accent" (click)="stopTimer()">Stop Timer
+							</button>
+							You can stop the timer in case your break finishes early. Make your Elgato Stream Deck
+							or a script make a `GET` request to
+							the {{serverUrl}}/addTime?time=-999999999.
+							wish.
+						</li>
+					</ul>
+				</li>
+				<li>
+					<button mat-raised-button color="primary" (click)="goOffline()">Offline Mode</button>.
+					Use this mode when you want the display to darken to avoid distracting players.<br>
+					You can invoke this mode by making your Elgato Stream Deck or a script make a `GET` request to
+					the {{serverUrl}}/setScene?scene=Offline.
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

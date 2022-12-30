@@ -26,6 +26,7 @@ export class PlayerLogic {
 
 	onRefreshPlayers = (socket: Socket) => {
 		socket.emit(SocketEvents.PlayersChanged, players);
+		socket.emit(SocketEvents.PlayerIndexChanged, currentPlayerIndex);
 	};
 
 	onConfigureServer = (data: { numLEDs: number; numPlayers: number }) => {

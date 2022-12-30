@@ -132,7 +132,7 @@ export class InitiativeTrackerComponent implements OnInit {
 
 		// Badge is ~17% of shape
 		this.numWidth = box.width * 0.172;
-		this.fontSize = Math.floor(box.height / 2);
+		this.fontSize = Math.min(Math.floor(box.height / 2), 115);
 
 		const gap = this.numWidth * 1.1;
 		this.leftPaddingNumber = box.x;

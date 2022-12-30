@@ -1,0 +1,47 @@
+<div class="container" [ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/bg.jpeg)' }">
+	<div class="body">
+		<div class="bgFull sci-fi-font show">
+			<h1>Welcome to Electro DM!</h1>
+			<section class="group">
+				Electro DM is a tool to make DM'ing more engaging for players and easier on the DM.
+				<ol>
+					<li>Configure default human players in <a routerLink="/dm/player-config">Player
+							Config</a>.</li>
+					<li>
+						Build and progress through encounters in <a routerLink="/dm/battle">Encounter Mode</a>.
+						<ul>
+							<li>Players get a cool visual display of initiative (and other optional modes)!</li>
+							<li>Navigate to <a [href]="clientUrl" target="_blank">{{clientUrl}}</a> on a TV, iPad, or
+								another browser to see the player view. Show this to your players when playing!
+								<ul>
+									<li>
+										<button mat-raised-button color="primary" (click)="start()">Click here to start
+											the battle right away.</button>
+									</li>
+								</ul>
+							<li>Notice that as you progress through initiative order in <a
+									routerLink="/dm/battle">Encounter Mode</a>, the display is updated to show the
+								current player's turn.</li>
+						</ul>
+					</li>
+					<li>
+						Switch between 'modes' on the client display using <a routerLink="/dm/scene-manager">Scene
+							Manager</a>.
+						<ul>
+							<li>Bonus! You can use an Elgato Stream Deck to automate switching between scenes.</li>
+						</ul>
+					</li>
+					<li>
+						Take notes that are saved in your browser using <a routerLink="/dm/notes">Notes</a>.
+					</li>
+				</ol>
+			</section>
+			<section class="group">
+				<strong>Disclaimer</strong>: Electro DM is very much still a work in process. Things might change
+				rapidly. Additionally, I'm working on finding open-source resources. Currently, some proprietary
+				DnDBeyond resources are embedded which will need to be removed.
+			</section>
+
+		</div>
+	</div>
+</div>

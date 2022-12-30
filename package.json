@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"setup": "(cd client && npm install && cd ..) && (cd server && npm install && cd ..)",
-		"start": "(cd shared && tsc && cd ..) && (cd client && npm run start) & (cd server && npm run start && cd ..)"
+		"start": "(cd shared && tsc && cd build && node open.js) & (cd server && npm run start) & (cd client && npm run start && cd ..)"
 	},
 	"repository": {
 		"type": "git",
@@ -18,9 +18,14 @@
 	},
 	"homepage": "https://github.com/luxdvie/electro-dm#readme",
 	"dependencies": {
+		"ip": "^1.1.8",
+		"open": "^8.4.0",
+		"os": "^0.1.2",
 		"uuid": "^9.0.0"
 	},
 	"devDependencies": {
+		"@types/ip": "^1.1.0",
+		"@types/node-fetch": "^2.6.2",
 		"@types/uuid": "^9.0.0"
 	}
 }

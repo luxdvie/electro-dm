@@ -1,4 +1,7 @@
 import cors from 'cors';
+import * as fs from 'fs';
+import * as ip from 'ip';
+import * as path from 'path';
 import { Socket } from 'socket.io';
 import { ExpressInstance, HttpInstance, WebSocketInstance } from '.';
 import {
@@ -18,6 +21,26 @@ export class WebServer {
 	) {}
 
 	setup() {
+		setTimeout(() => {
+			ElectroDmConfig.setIpAddress(ip.address());
+			console.log(
+				`Set ElectroDM clientUrl to: ${ElectroDmConfig.clientUrl}`
+			);
+
+			const targetDir = path.join(
+				__dirname,
+				'..',
+				'..',
+				'shared',
+				'build'
+			);
+
+			fs.writeFileSync(
+				path.join(targetDir, 'config.json'),
+				JSON.stringify(ElectroDmConfig)
+			);
+		});
+
 		ExpressInstance.use(
 			cors({
 				origin: ElectroDmConfig.clientUrl,
@@ -28,6 +51,10 @@ export class WebServer {
 
 		ExpressInstance.get('/', (req, res) => {
 			res.send('Electro DM Server Running');
+		});
+
+		ExpressInstance.get('/config', (req, res) => {
+			res.send(ElectroDmConfig);
 		});
 
 		ExpressInstance.get('/connect', async (req, res) => {

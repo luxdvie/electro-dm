@@ -23,12 +23,22 @@ import { LedStripComponent } from './led/led-strip/led-strip.component';
 import { LEDComponent } from './led/led/led.component';
 import { NotesComponent } from './notes/notes.component';
 import { PlayerConfigComponent } from './player-config/player-config.component';
+import { SceneManagerComponent } from './scene-manager/scene-manager.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
 	{
 		path: '',
 		component: DmViewComponent,
 		children: [
+			{
+				path: '',
+				component: BattleTrackerComponent,
+			},
+			{
+				path: 'welcome',
+				component: WelcomeComponent,
+			},
 			{
 				path: 'battle',
 				component: BattleTrackerComponent,
@@ -44,6 +54,10 @@ const routes: Routes = [
 			{
 				path: 'notes',
 				component: NotesComponent,
+			},
+			{
+				path: 'scene-manager',
+				component: SceneManagerComponent,
 			},
 		],
 	},
@@ -78,6 +92,8 @@ const routes: Routes = [
 		DeviceComponent,
 		NotesComponent,
 		PlayerConfigComponent,
+		WelcomeComponent,
+		SceneManagerComponent,
 	],
 })
 export class DmModule {}

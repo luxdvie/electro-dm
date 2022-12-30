@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Player } from '../../../../shared/src';
+import { Player, PlayerType } from '../../../../shared/src';
+import { PlayerClass, PlayerRace } from '../../../../shared/src/PlayerClass';
 
 export const PlayersLocalStorageKey = 'players';
 
@@ -21,6 +22,25 @@ export class DBService {
 						'Unexpected data type returned from JSON.parse'
 					);
 				}
+			} else {
+				return Promise.resolve([
+					Player.makePlayer({
+						name: 'Default Player 1',
+						race: PlayerRace.Aarakocra,
+						playerClass: PlayerClass.Artificer,
+						playerType: PlayerType.Player,
+						image: 'unknown.png',
+						dmNotes: 'Sample DM notes...'
+					}),
+					Player.makePlayer({
+						name: 'Default Player 2',
+						race: PlayerRace.FireGenasi,
+						playerClass: PlayerClass.Fighter,
+						playerType: PlayerType.Player,
+						image: 'unknown.png',
+						dmNotes: 'Sample DM notes...'
+					})
+				]);
 			}
 		} catch (err) {
 			return Promise.reject('Unable to load player data');

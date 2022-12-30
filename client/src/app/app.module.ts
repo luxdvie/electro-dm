@@ -22,7 +22,6 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
 	{
 		path: 'dm',
-		pathMatch: 'prefix',
 		loadChildren: () =>
 			import('./dm-module/dm.module').then((m) => m.DmModule),
 	},

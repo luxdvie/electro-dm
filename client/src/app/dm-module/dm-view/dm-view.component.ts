@@ -9,7 +9,32 @@ import { ViewServiceService } from 'src/app/services/view-service.service';
 	styleUrls: ['./dm-view.component.scss'],
 })
 export class DmViewComponent implements OnInit {
-	links = ['Battle', 'Notes', 'Player Config', 'Led'];
+	links = [
+		{
+			label: 'Encounter Builder',
+			route: '/dm/battle',
+		},
+		{
+			label: 'Notes',
+			route: '/dm/notes',
+		},
+		{
+			label: 'Player Config',
+			route: '/dm/player-config',
+		},
+		{
+			label: 'Scene Manager',
+			route: '/dm/scene-manager',
+		},
+		{
+			label: 'Help',
+			route: '/dm/welcome',
+		},
+		// {
+		// 	label: 'LED Builder (Nonfunctional)',
+		// 	route: '/dm/led',
+		// },
+	];
 
 	fullScreen: boolean = false;
 
@@ -20,18 +45,31 @@ export class DmViewComponent implements OnInit {
 		this.viewService.fullScreen$.subscribe((fullScreen) => {
 			this.fullScreen = fullScreen;
 		});
+
+		if (this.router.url) {
+			const matchingLink = this.links.find(
+				(l) => l.route === this.router.url
+			);
+
+			if (matchingLink) {
+				this.activeLabel = matchingLink.label;
+			}
+		}
 	}
 
 	ngOnInit(): void {}
 
-	private _activeLink: string = 'Battle';
-	get activeLink() {
-		return this._activeLink;
+	private _activeLabel: string = '';
+	get activeLabel() {
+		return this._activeLabel;
 	}
-	set activeLink(value: string) {
-		if (this._activeLink != value) {
-			this._activeLink = value.toLowerCase().replace(/\ /gi, '-');
-			this.router.navigate(['dm/' + this._activeLink]);
+	set activeLabel(value: string) {
+		if (this._activeLabel != value) {
+			const e = this.links.find((l) => l.label === value);
+			if (e) {
+				this._activeLabel = e.label;
+				this.router.navigate([e.route]);
+			}
 		}
 	}
 
