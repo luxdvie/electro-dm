@@ -10,8 +10,10 @@ import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
 import { ViewServiceService } from 'src/app/services/view-service.service';
 import {
-	ElectroDmConfig, Player,
-	PlayerType, SocketEvents
+	ElectroDmConfig,
+	Player,
+	PlayerType,
+	SocketEvents
 } from '../../../../../../shared/src';
 
 @Component({
@@ -82,6 +84,15 @@ export class InitiativeTrackerComponent implements OnInit {
 					(p) => p.playerType === PlayerType.Player
 				);
 
+				if (this.currentPlayer) {
+					const id = this.currentPlayer.id;
+					const existingPlayer = this.allPlayers.find(p => p.id === id);
+					if (existingPlayer) {
+						this.currentPlayer = existingPlayer; // to force re-render
+					}
+
+				}
+
 				this.handleResize();
 			});
 
@@ -123,7 +134,7 @@ export class InitiativeTrackerComponent implements OnInit {
 		this.numWidth = box.width * 0.172;
 		this.fontSize = Math.floor(box.height / 2);
 
-		const gap = this.numWidth * 1.15;
+		const gap = this.numWidth * 1.1;
 		this.leftPaddingNumber = box.x;
 		this.leftPaddingName = this.leftPaddingNumber + gap;
 		this.nameWidth = box.width - this.numWidth - gap;
