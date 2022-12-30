@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngIf="!fullScreen">
+<!-- <mat-toolbar color="primary" *ngIf="!fullScreen">
 	<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
 		<mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
 		<mat-menu #menu="matMenu">
@@ -14,7 +14,7 @@
 	<button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
 		<mat-icon>share</mat-icon>
 	</button>
-</mat-toolbar>
+</mat-toolbar> -->
 
 <nav mat-tab-nav-bar [backgroundColor]="background" [tabPanel]="tabPanel" *ngIf="!fullScreen">
 	<a mat-tab-link *ngFor="let link of links" (click)="activeLink = link" [active]="activeLink == link"> {{link}} </a>
