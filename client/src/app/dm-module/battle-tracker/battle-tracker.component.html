@@ -1,11 +1,11 @@
 <div class="container">
 	<div class="header">
-		<button mat-raised-button color="primary" (click)="addChar()">Add DM Character</button>&nbsp;
-		<button mat-raised-button color="primary" (click)="addGoblin()">Add Goblin</button>&nbsp;
-		<button mat-raised-button color="accent" (click)="startOrNext()">
+		<button mat-raised-button color="warn" (click)="addChar()">Add DM Character</button>&nbsp;
+		<button mat-raised-button color="warn" (click)="addGoblin()">Add Goblin</button>&nbsp;
+		<button mat-raised-button color="primary" (click)="startOrNext()">
 			{{ currentPlayerIndex === undefined ? 'Start Encounter' : 'Next Player' }}
 		</button>&nbsp;
-		<button mat-raised-button color="warn" (click)="reset()">Reset Encounter</button>
+		<button mat-raised-button (click)="reset()">Reset + Delete DM Characters</button>
 	</div>
 	<div class="body">
 		<mat-card class="player-card" *ngFor="let player of players; let i = index"
