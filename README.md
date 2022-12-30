@@ -10,6 +10,8 @@ Use a NodeJS server and Angular frontend application combined with a soundboard,
 
 This is a platform that starts with a laptop running NodeJS and Angular apps. From there, we add the following components to build an immersive D&D experienced.
 
+- Laptop facing the DM
+- iPad, TV, or other web device facing the Players
 - Loud speaker connected to laptop
 - Spotify Playlists, Sound Effects
 - Phillips Hue Lights (optional)
