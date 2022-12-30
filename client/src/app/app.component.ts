@@ -9,10 +9,15 @@ export class AppComponent {
 	ready = false;
 
 	async ngOnInit() {
+		//
+		// This step is performed to synchronize the ElectroDmConfig values
+		// from the server to the client. In the future, we should store the
+		// config in a database and retrieve it from a database to avoid this
+		// weirdness.
+		//
+
 		const res = await fetch(
-			`http://${
-				window.location.host.split(':')[0]
-			}:${SERVER_PORT}/config`
+			`http://${window.location.host.split(':')[0]}:${SERVER_PORT}/config`
 		);
 		const config = await res.json();
 

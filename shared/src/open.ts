@@ -16,6 +16,13 @@ const openUrl = async () => {
 
 	let url: string = '';
 	try {
+		//
+		// This step is performed to synchronize the ElectroDmConfig values
+		// from the server to the shared code. In the future, we should store the
+		// config in a database and retrieve it from a database to avoid this
+		// weirdness.
+		//
+
 		const filePath = path.join(__dirname, 'config.json');
 		if (!fs.existsSync(filePath)) {
 			setTimeout(openUrl, 500);
