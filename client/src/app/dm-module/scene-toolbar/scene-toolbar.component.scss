@@ -11,7 +11,7 @@ $font-size: 2rem;
 	top: 50%;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	opacity: 0.75;
+	// opacity: 0.75;
 	transform: translate(-20%, -50%);
 	transition-timing-function: ease;
 	transition-duration: 0.5s;
@@ -21,17 +21,29 @@ $font-size: 2rem;
 }
 
 :host(:hover) {
-	opacity: 1;
+	// opacity: 1;
 	transform: translate(0, -50%);
 
 	.container::after {
 		opacity: 1;
 	}
+
+	.container > span {
+		width: 100%;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-left: 0;
+		height: auto;
+		font-size: $font-size;
+		text-align: center;
+		transition: background-color 0.2s ease;
+		border: 1px solid grey;
+	}
 }
 
 .container::after {
 	position: absolute;
-	content: " ";
+	content: ' ';
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -58,13 +70,14 @@ $font-size: 2rem;
 	position: relative;
 
 	> span {
+		transition: all 0.2s ease;
 		width: 100%;
 		padding-top: 5px;
 		padding-bottom: 5px;
+		padding-left: 9px;
 		height: auto;
-		font-size: $font-size;
+		font-size: 1.75rem;
 		text-align: center;
-		transition: background-color 0.2s ease;
 		background: silver;
 		border: 1px solid grey;
 
@@ -89,11 +102,11 @@ $font-size: 2rem;
 }
 
 .blue {
-	color: rgb(56, 56, 232);
+	color: rgb(93, 93, 236);
 }
 
 .red {
-	color: rgb(230, 65, 65);
+	color: rgb(236, 94, 94);
 }
 
 .orange {

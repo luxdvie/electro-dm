@@ -31,19 +31,19 @@ export class SceneToolbarComponent implements OnInit {
 		{
 			mode: PresentationMode.Offline,
 			active: false,
-			icon: 'black fa-solid fa-power-off',
+			icon: 'black fa-regular fa-eye-slash',
 			title: 'Go offline on the client app',
 		},
 		{
 			mode: PresentationMode.FireScene,
 			active: false,
-			icon: 'red fa-solid fa-fire',
+			icon: 'red fa-sharp fa-solid fa-fire-flame-curved',
 			title: 'Shows a fire scene on the client app',
 		},
 		{
 			mode: PresentationMode.Timer,
 			active: false,
-			icon: 'blue fa-solid fa-hourglass-end',
+			icon: 'blue fa-regular fa-clock',
 			title: 'Starts a timer (for a break) on the client app',
 		},
 	];

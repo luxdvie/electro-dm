@@ -15,7 +15,7 @@ body {
 }
 
 .sci-fi-font {
-	font-family: 'share_tech_monoregular';
+	font-family: 'share_tech_monoregular' !important;
 }
 
 * {
@@ -23,3 +23,16 @@ body {
 }
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Custom Angular Material Settings */
+
+.cdk-overlay-container {
+	z-index: 999999;
+
+	.mat-tooltip {
+		background: rgb(97 97 97);
+		font-size: 0.9rem;
+		max-width: 20rem;
+		font-family: 'share_tech_monoregular';
+	}
+}

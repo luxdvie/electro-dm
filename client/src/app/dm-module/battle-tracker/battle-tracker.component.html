@@ -18,29 +18,43 @@
 						target="_blank">{{player.name}}</a></mat-card-title>
 				<mat-card-subtitle class="sci-fi-font">{{player.race}} {{player.playerClass}}</mat-card-subtitle>
 			</mat-card-header>
-			<mat-card-content class="card-content">
-				<p [innerHtml]="player.dmNotes">
-				</p>
-				<div class="dm-banner" *ngIf="player.playerType === 'DM'">
-					<div class="col">
-						<mat-form-field appearance="fill">
-							<mat-label>DM Icon:</mat-label>
-							<select matNativeControl [(ngModel)]="player.bannerImage" name="bannerImage"
-								(change)="onChangeImage()">
-								<option value="" selected></option>
-								<option *ngFor="let image of dmImages" [value]="image.value">
-									{{image.viewValue}}
-								</option>
-							</select>
-						</mat-form-field>
-						<div *ngIf="player.bannerImage" class="banner-preview">
-							<img [src]="clientUrl + '/assets/' + player.bannerImage">
+			<mat-card-content class="card-content sci-fi-font">
+				<div class="content-group">
+					<mat-accordion>
+						<mat-expansion-panel>
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									View DM Notes
+								</mat-panel-title>
+							</mat-expansion-panel-header>
+							<p [innerHtml]="player.dmNotes">
+							</p>
+						</mat-expansion-panel>
+					</mat-accordion>
+				</div>
+				<div class="content-group">
+					<div class="dm-banner" *ngIf="player.playerType === 'DM'">
+						<div class="col">
+							<mat-form-field appearance="fill">
+								<mat-label>DM Icon:</mat-label>
+								<select matNativeControl [(ngModel)]="player.bannerImage" name="bannerImage"
+									(change)="onChangeImage()">
+									<option value="" selected></option>
+									<option *ngFor="let image of dmImages" [value]="image.value">
+										{{image.viewValue}}
+									</option>
+								</select>
+							</mat-form-field>
+							<div *ngIf="player.bannerImage" class="banner-preview">
+								<img [src]="clientUrl + '/assets/' + player.bannerImage">
+							</div>
+						</div>
+						<div class="actions col">
+							<button mat-raised-button color="warn" (click)="deletePlayer(player)">Delete</button>
 						</div>
 					</div>
-					<div class="actions col">
-						<button mat-raised-button color="warn" (click)="deletePlayer(player)">Delete</button>
-					</div>
 				</div>
+
 				<div *ngIf="isBattleActive" class="init sci-fi-font" [class.current-player]="currentPlayerIndex === i">
 					<input [attr.data-player]="player.name" (focus)="selectOnFocus($event, player);"
 						(blur)="focusedPlayer = null" matInput

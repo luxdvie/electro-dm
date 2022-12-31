@@ -1,4 +1,4 @@
 <div class="container">
 	<span *ngFor="let item of items" (click)="setScene(item)" [class.active]="activeScene === item.mode"
-		[ngClass]="item.icon" [title]="item.title"></span>
+		[ngClass]="item.icon" [matTooltip]="item.title" matTooltipPosition="after"></span>
 </div>
