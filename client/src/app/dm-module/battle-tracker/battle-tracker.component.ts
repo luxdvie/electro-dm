@@ -48,18 +48,33 @@ export class BattleTrackerComponent implements OnInit {
 	}
 
 	focusTo: Player | null = null;
+	focusNext: boolean = false;
 
 	ngAfterViewChecked() {
 		if (!this.focusTo) return;
 
 		const byInit = this.players.slice().sort(BattleService.sortByInit);
-		let targetFocusPlayer = this.focusTo.name;
+		let targetFocusPlayer = this.focusTo.id;
 
 		for (let i = 0; i < byInit.length; i++) {
 			const player = byInit[i];
 			if (player.initiative === 0) {
-				targetFocusPlayer = player.name;
+				targetFocusPlayer = player.id;
 				break;
+			}
+		}
+
+		if (this.focusNext) {
+			const indexOfFocusTo = byInit.findIndex(
+				(p) => p.id === this.focusTo?.id
+			);
+			if (indexOfFocusTo > -1) {
+				let nextIndex = indexOfFocusTo + 1;
+				if (nextIndex >= byInit.length) {
+					nextIndex = 0;
+				}
+
+				targetFocusPlayer = byInit[nextIndex].id;
 			}
 		}
 
@@ -74,9 +89,11 @@ export class BattleTrackerComponent implements OnInit {
 		}, 200);
 
 		this.focusTo = null;
+		this.focusNext = false;
 	}
 
 	onTabKeydown = (event: Event, player: Player) => {
+		this.focusNext = true;
 		this.focusTo = player;
 	};
 

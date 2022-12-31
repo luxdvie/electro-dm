@@ -90,7 +90,6 @@ export class InitiativeTrackerComponent implements OnInit {
 					if (existingPlayer) {
 						this.currentPlayer = existingPlayer; // to force re-render
 					}
-
 				}
 
 				this.handleResize();

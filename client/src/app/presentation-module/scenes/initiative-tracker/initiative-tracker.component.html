@@ -25,7 +25,12 @@
 				</svg>
 				<div [style.left.px]="leftPaddingNumber" [style.font-size.px]="fontSize" [style.width.px]="numWidth"
 					class="number sci-fi-font">
-					{{ player.initiative }}
+					<ng-container *ngIf="player.initiative !== 0">
+						{{ player.initiative }}
+					</ng-container>
+					<ng-container *ngIf="player.initiative === 0">
+						<img class="scale" src="/assets/d20.svg"/>
+					</ng-container>
 				</div>
 				<div [style.left.px]="leftPaddingName" [style.font-size.px]="fontSize" [style.width.px]="nameWidth"
 					class="name sci-fi-font">

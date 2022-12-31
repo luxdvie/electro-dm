@@ -158,6 +158,7 @@ export class BattleService {
 
 	orderPlayers() {
 		this.setPlayers(this.players.sort(BattleService.sortByInit));
+		this.setCurrentPlayer(this._currentPlayerIndex);
 	}
 
 	static sortByInit = (a: Player, b: Player) => {

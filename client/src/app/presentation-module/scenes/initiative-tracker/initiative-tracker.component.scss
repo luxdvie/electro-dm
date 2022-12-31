@@ -271,7 +271,7 @@ svg {
 	left: 0;
 	opacity: 0;
 	background: black;
-	transition: opacity .5s ease-in;
+	transition: opacity 0.5s ease-in;
 	position: absolute;
 	z-index: 999999;
 
@@ -283,4 +283,28 @@ svg {
 img.banner {
 	max-width: 50%;
 	max-height: 50%;
+}
+
+.scale {
+	z-index: 99999;
+	position: absolute;
+	width: 110px;
+	height: 110px;
+	transform: scale(1.2);
+	opacity: 1;
+	transform: rotate(180deg);
+	transition: transform .2s linear;
+	animation: tilt 5s linear infinite alternate;
+}
+
+@keyframes tilt {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
 }
