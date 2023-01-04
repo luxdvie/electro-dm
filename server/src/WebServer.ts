@@ -189,6 +189,9 @@ export class WebServer {
 				this.playerLogic.onNewPlayers
 			);
 
+			socket.on(SocketEvents.NextStoryPage, this.playerLogic.onNextPage);
+			socket.on(SocketEvents.PreviousStoryPage, this.playerLogic.onPreviousPage);
+
 			socket.on(SocketEvents.RefreshTime, () => {
 				this.playerLogic.onRefreshTime(socket);
 			});

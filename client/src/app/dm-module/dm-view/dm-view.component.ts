@@ -30,6 +30,10 @@ export class DmViewComponent implements OnInit {
 			label: 'Help',
 			route: '/dm/welcome',
 		},
+		{
+			label: 'Campaign Tools',
+			route: '/dm/tools',
+		},
 		// {
 		// 	label: 'LED Builder (Nonfunctional)',
 		// 	route: '/dm/led',

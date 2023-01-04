@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { Player } from '../../../../../shared/src';
+import { Player, PlayerBase } from '../../../../../shared/src';
 import { PlayerClass, PlayerRace } from '../../../../../shared/src/PlayerClass';
 
 @Component({
@@ -53,7 +53,7 @@ export class PlayerEditDialog {
 			player: Player;
 		}
 	) {
-		this.playerCopy = Player.makePlayer(
+		this.playerCopy = PlayerBase.makePlayer(
 			JSON.parse(JSON.stringify(data.player || {}))
 		);
 	}

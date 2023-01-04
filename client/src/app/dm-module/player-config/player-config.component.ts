@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BattleService } from 'src/app/services/battle.service';
 import { DBService } from 'src/app/services/db.service';
-import { ElectroDmConfig, Player, PlayerType } from '../../../../../shared/src';
+import { ElectroDmConfig, Player, PlayerBase, PlayerType } from '../../../../../shared/src';
 import { PlayerClass, PlayerRace } from '../../../../../shared/src/PlayerClass';
 import { PlayerEditDialog } from './player-edit-dialog-component';
 
@@ -30,7 +30,7 @@ export class PlayerConfigComponent implements OnInit {
 	addCharacter() {
 		// TODO: Open the edit modal right away
 		this.players.push(
-			Player.makePlayer({
+			PlayerBase.makePlayer({
 				name: 'New Player ' + (this.players.length + 1),
 				image: 'unknown.png',
 				race: PlayerRace.Human,
@@ -76,7 +76,7 @@ export class PlayerConfigComponent implements OnInit {
 			const replaceAt = this.players.findIndex((p) => p.id === player.id);
 
 			if (replaceAt > -1) {
-				this.players.splice(replaceAt, 1, Player.makePlayer(player));
+				this.players.splice(replaceAt, 1, PlayerBase.makePlayer(player));
 				this.save();
 			}
 		});

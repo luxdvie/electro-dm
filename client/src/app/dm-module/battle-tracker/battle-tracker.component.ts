@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
 import {
-	DMBannerImages,
-	ElectroDmConfig,
+	DMBannerImages, ElectroDmConfig,
+	Goblin,
 	Player,
+	PlayerBase,
 	PlayerType
 } from '../../../../../shared/src';
 import { PlayerClass, PlayerRace } from '../../../../../shared/src/PlayerClass';
@@ -32,6 +33,7 @@ export class BattleTrackerComponent implements OnInit {
 		return this.battleService.players;
 	}
 
+	currentPlayer: Player | undefined;
 	get currentPlayerIndex() {
 		return this.battleService.currentPlayerIndex;
 	}
@@ -39,7 +41,8 @@ export class BattleTrackerComponent implements OnInit {
 	constructor(
 		protected battleService: BattleService,
 		private socketService: SocketServiceService
-	) {}
+	) {
+	}
 
 	ngOnInit(): void {
 		this.battleService.battleActive$.subscribe((isActive) => {
@@ -127,7 +130,7 @@ export class BattleTrackerComponent implements OnInit {
 
 	addChar() {
 		this.battleService.addChar(
-			Player.makePlayer({
+			PlayerBase.makePlayer({
 				name: 'DM Player ' + (this.players.length + 1),
 				seat: ElectroDmConfig.dmSeat,
 				image: 'dm.png',
@@ -141,19 +144,7 @@ export class BattleTrackerComponent implements OnInit {
 	}
 
 	addGoblin() {
-		this.battleService.addChar(
-			Player.makePlayer({
-				name: 'Goblin ' + (this.players.length + 1),
-				seat: ElectroDmConfig.dmSeat,
-				image: 'troll.png',
-				bannerImage: DMBannerImages.Troll,
-				race: PlayerRace.Goblin,
-				playerClass: PlayerClass.Fighter,
-				playerType: PlayerType.DM,
-				link: 'https://www.dndbeyond.com/monsters',
-				dmNotes: 'dm character',
-			})
-		);
+		this.battleService.addChar(Goblin());
 	}
 
 	deletePlayer(player: Player) {

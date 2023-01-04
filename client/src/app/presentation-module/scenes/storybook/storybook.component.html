@@ -1,5 +1,3 @@
-<p>storybook works! page: {{page}}</p>
-
 <div class="container scene-transition" [class.showing]="showing"
 	[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/scenes/story-bg.jpeg)' }">
 	<div class="page-flip-container" [class.hide]="!isTurningPage">
@@ -9,11 +7,11 @@
 		</div>
 	</div>
 
-	<div class="bgFull sci-fi-font show"
+	<div class="bgFull sci-fi-font show" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')"
 		[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/order-tracker/paper.jpeg)' }">
 		<ng-container *ngIf="pageContent">
-			<span class="a" *ngIf="pageContent.header">{{pageContent.header}}</span>
-			<img *ngIf="pageContent.image" [src]="pageContent.image">
+			<span class="header sci-fi-font" *ngIf="pageContent.header">{{pageContent.header}}</span>
+			<img *ngIf="pageContent.image" [src]="pageContent.image" class="content">
 			<span class="b" *ngIf="pageContent.footer">ffff</span>
 		</ng-container>
 

@@ -18,6 +18,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxEditorModule } from 'ngx-editor';
 import { BattleTrackerComponent } from './battle-tracker/battle-tracker.component';
+import { CampaignToolsComponent } from './campaign-tools/campaign-tools.component';
+import { PasswordPuzzleComponent } from './campaign-tools/password-puzzle/password-puzzle.component';
+import { DmPlayerComponent } from './dm-player/dm-player.component';
 import { DmViewComponent } from './dm-view/dm-view.component';
 import { AnimationLayerComponent } from './led/animation-layer/animation-layer.component';
 import { DeviceComponent } from './led/device/device.component';
@@ -62,6 +65,10 @@ const routes: Routes = [
 				path: 'scene-manager',
 				component: SceneManagerComponent,
 			},
+			{
+				path: 'tools',
+				component: CampaignToolsComponent,
+			},
 		],
 	},
 ];
@@ -100,6 +107,9 @@ const routes: Routes = [
 		WelcomeComponent,
 		SceneManagerComponent,
 		SceneToolbarComponent,
+		CampaignToolsComponent,
+		PasswordPuzzleComponent,
+		DmPlayerComponent
 	],
 })
 export class DmModule {}

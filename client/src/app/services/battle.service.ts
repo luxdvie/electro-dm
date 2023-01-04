@@ -4,6 +4,7 @@ import {
 	Commands,
 	ElectroDmConfig,
 	Player,
+	PlayerBase,
 	PlayerType,
 	SocketEvents
 } from '../../../../shared/src';
@@ -95,7 +96,12 @@ export class BattleService {
 		this.socketService
 			.fromEvent(SocketEvents.PlayersChanged)
 			.subscribe((newPlayers: any) => {
-				this.setPlayers(newPlayers as Player[], false);
+				this.setPlayers(
+					(newPlayers as Player[]).map((p) =>
+						PlayerBase.makePlayer(p)
+					),
+					false
+				);
 			});
 
 		this.socketService
