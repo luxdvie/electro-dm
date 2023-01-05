@@ -118,7 +118,9 @@ export class BattleTrackerComponent implements OnInit {
 	}
 
 	onChangeImage() {
-		this.battleService.setPlayers(this.players);
+		setTimeout(() => {
+			this.battleService.savePlayers();
+		});
 	}
 
 	async reset() {

@@ -9,7 +9,7 @@
 }
 
 .player-card {
-	width: 45%;
+	width: 60%;
 	min-width: 500px;
 	border-radius: 10px;
 	overflow: hidden;
@@ -153,11 +153,8 @@ a:visited.player-link {
 	gap: 10px;
 	overflow-y: auto;
 	margin-bottom: 20px;
-}
-
-.body {
 	flex: 1 1 auto;
-	justify-content: center;
+	justify-content: center; // TODO: Add stat blocks to right and get rid of this?
 }
 
 .narrow {
