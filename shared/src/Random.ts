@@ -22,6 +22,7 @@ enum Dice {
 	d20 = 'd20',
 	d12 = 'd12',
 	d10 = 'd10',
+	d8 = 'd8',
 	d6 = 'd6',
 	d4 = 'd4',
 	d100 = 'd100',
@@ -42,6 +43,11 @@ export const DiceConfig = {
 		min: 1,
 		max: 10,
 		average: 5.5,
+	},
+	[Dice.d8]: {
+		min: 1,
+		max: 8,
+		average: 4.5,
 	},
 	[Dice.d6]: {
 		min: 1,
@@ -68,6 +74,7 @@ class DiceRoll {
 	d20 = () => this.roll(Dice.d20);
 	d12 = () => this.roll(Dice.d12);
 	d10 = () => this.roll(Dice.d10);
+	d8 = () => this.roll(Dice.d8);
 	d6 = () => this.roll(Dice.d6);
 	d4 = () => this.roll(Dice.d4);
 
@@ -77,7 +84,7 @@ class DiceRoll {
 				DiceConfig[dice].min,
 				DiceConfig[dice].max
 			);
-			console.log('roll: ' + dice);
+
 			this.value += roll;
 			this.lastModifier--;
 		}

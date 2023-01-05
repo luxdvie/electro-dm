@@ -58,6 +58,7 @@ export enum PlayerRace {
 	Human = 'Human',
 	VariantHuman = 'Variant Human',
 	Tiefling = 'Tiefling',
+	Monster = 'Monster',
 }
 
 export enum PlayerClass {

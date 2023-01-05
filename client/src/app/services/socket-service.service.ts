@@ -11,11 +11,6 @@ export class SocketServiceService {
 
 	constructor() {
 		this.socket = io(ElectroDmConfig.apiUrl);
-		this.socket.on('message', (message) => {
-			console.log(`Message received: ${message}`);
-		});
-
-		this.socket.emit('message', 'Hello');
 	}
 
 	setupSocketConnection() {}

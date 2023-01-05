@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
 import {
-	DMBannerImages, ElectroDmConfig,
+	Bodak,
+	DMBannerImages,
+	ElectroDmConfig,
 	Goblin,
 	Player,
 	PlayerBase,
@@ -41,8 +43,7 @@ export class BattleTrackerComponent implements OnInit {
 	constructor(
 		protected battleService: BattleService,
 		private socketService: SocketServiceService
-	) {
-	}
+	) {}
 
 	ngOnInit(): void {
 		this.battleService.battleActive$.subscribe((isActive) => {
@@ -147,6 +148,10 @@ export class BattleTrackerComponent implements OnInit {
 		this.battleService.addChar(Goblin());
 	}
 
+	addBodak() {
+		this.battleService.addChar(Bodak());
+	}
+
 	deletePlayer(player: Player) {
 		if (
 			confirm(
@@ -158,6 +163,39 @@ export class BattleTrackerComponent implements OnInit {
 				this.players.splice(deleteAt, 1);
 				this.battleService.setPlayers(this.players);
 			}
+		}
+	}
+
+	getDamageValue(player: Player): number | undefined {
+		const id = `#hp-ele-${player.id}`;
+		const input = document.querySelector(id) as HTMLInputElement;
+
+		let value: number | undefined = undefined;
+		if (input) {
+			const iValue = parseInt(input.value);
+			if (!Number.isNaN(iValue)) {
+				value = parseInt(input.value);
+			}
+
+			input.value = '';
+		}
+
+		return value;
+	}
+
+	applyDamage(player: Player) {
+		const damage = this.getDamageValue(player);
+		if (damage !== undefined) {
+			player.applyDamage(damage);
+			this.battleService.savePlayers();
+		}
+	}
+
+	applyHeal(player: Player) {
+		const heal = this.getDamageValue(player);
+		if (heal !== undefined) {
+			player.applyHeal(heal);
+			this.battleService.savePlayers();
 		}
 	}
 }

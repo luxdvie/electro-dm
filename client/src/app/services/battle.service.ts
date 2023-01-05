@@ -18,6 +18,9 @@ export class BattleService {
 	private _currentPlayer = new BehaviorSubject<Player | undefined>(undefined);
 	currentPlayer$ = this._currentPlayer.asObservable();
 
+	private _playersSubject = new BehaviorSubject<Player[]>([]);
+	players$ = this._playersSubject.asObservable();
+
 	private _nextPlayerName = new BehaviorSubject<string | undefined | null>(
 		undefined
 	);
@@ -30,6 +33,8 @@ export class BattleService {
 
 	setPlayers(value: Player[], broadcast: boolean = true) {
 		this._players = value;
+		this._playersSubject.next(this._players);
+
 		if (broadcast) {
 			this.socketService.send('players', this._players);
 		}
@@ -95,13 +100,22 @@ export class BattleService {
 	) {
 		this.socketService
 			.fromEvent(SocketEvents.PlayersChanged)
-			.subscribe((newPlayers: any) => {
-				this.setPlayers(
-					(newPlayers as Player[]).map((p) =>
-						PlayerBase.makePlayer(p)
-					),
-					false
+			.subscribe((newPlayerObj: any) => {
+				const newPlayers = (newPlayerObj as Player[]).map((p) =>
+					PlayerBase.makePlayer(p)
 				);
+
+				// let same: boolean = true;
+				// this.players.forEach((from) => {
+				// 	const to = newPlayers.find((t) => t.id === from.id);
+				// 	if (!from.equals(to as Player)) {
+				// 		same = false;
+				// 	}
+				// });
+
+				// if (!same || this.players.length === 0) {
+				this.setPlayers(newPlayers, false);
+				//}
 			});
 
 		this.socketService
@@ -118,6 +132,10 @@ export class BattleService {
 					}
 				}
 			});
+
+		setTimeout(() => {
+			this.socketService.send(SocketEvents.RefreshPlayers, undefined);
+		});
 	}
 
 	sendCommand(command: string) {
@@ -165,6 +183,10 @@ export class BattleService {
 	orderPlayers() {
 		this.setPlayers(this.players.sort(BattleService.sortByInit));
 		this.setCurrentPlayer(this._currentPlayerIndex);
+	}
+
+	savePlayers() {
+		this.setPlayers(this.players);
 	}
 
 	static sortByInit = (a: Player, b: Player) => {

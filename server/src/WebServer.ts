@@ -175,10 +175,6 @@ export class WebServer {
 		);
 
 		WebSocketInstance.on('connection', (socket: Socket) => {
-			socket.on(SocketEvents.RefreshPlayers, () => {
-				this.playerLogic.onRefreshPlayers(socket);
-			});
-
 			socket.on(
 				SocketEvents.ConfigureServer,
 				this.playerLogic.onConfigureServer
@@ -190,10 +186,17 @@ export class WebServer {
 			);
 
 			socket.on(SocketEvents.NextStoryPage, this.playerLogic.onNextPage);
-			socket.on(SocketEvents.PreviousStoryPage, this.playerLogic.onPreviousPage);
+			socket.on(
+				SocketEvents.PreviousStoryPage,
+				this.playerLogic.onPreviousPage
+			);
 
 			socket.on(SocketEvents.RefreshTime, () => {
 				this.playerLogic.onRefreshTime(socket);
+			});
+
+			socket.on(SocketEvents.RefreshPlayers, () => {
+				this.playerLogic.onRefreshPlayers(socket);
 			});
 
 			socket.on(SocketEvents.RefreshStoryPage, () => {
@@ -212,11 +215,6 @@ export class WebServer {
 				SocketEvents.CurrentPlayerIndexReceived,
 				this.playerLogic.onNewPlayerIndex
 			);
-
-			socket.on('message', (message: string) => {
-				socket.emit('message', 'Hello from server');
-				this.playerLogic.onHello(socket);
-			});
 		});
 	}
 }
