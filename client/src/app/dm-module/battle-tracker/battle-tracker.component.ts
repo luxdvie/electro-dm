@@ -68,7 +68,7 @@ export class BattleTrackerComponent implements OnInit {
 			}
 		}
 
-		if (this.focusNext) {
+		if (!targetFocusPlayer && this.focusNext) {
 			const indexOfFocusTo = byInit.findIndex(
 				(p) => p.id === this.focusTo?.id
 			);

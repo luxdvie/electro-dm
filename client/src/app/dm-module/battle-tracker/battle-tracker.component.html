@@ -55,6 +55,9 @@
 									class="heal-badge sci-fi-font">HEAL</button>
 							</div>
 						</mat-form-field>
+						<ng-container *ngIf="player.lifeState === 'Dead' || player.lifeState === 'Dying'">
+							<span class="dying-alert-text">{{player.lifeState}}</span>
+						</ng-container>
 					</div>
 					<div class="content-group">
 						<div class="dm-banner">
