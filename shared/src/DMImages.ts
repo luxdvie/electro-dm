@@ -10,4 +10,6 @@ export const DMBannerImages = {
 	Orc: 'profile/orc.png',
 	'Red Dragon': 'profile/red-dragon.png',
 	Troll: 'profile/troll.png',
+	Nightwalker: 'profile/nightwalker.png',
+	Goblin: 'profile/goblin.png'
 };

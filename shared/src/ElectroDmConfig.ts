@@ -1,5 +1,7 @@
 import { PlayerClass, PlayerRace } from './PlayerClass';
 
+export const NUM_LEDS = 344; // Put the number of LEDs you have here.
+
 /******
  ! Don't change anything below here unless you know what
  you're doing. Feel free to raise a GitHub issue if something
@@ -12,8 +14,9 @@ export const SERVER_PORT = 8080; // The port on which the server app runs.
 export const CLIENT_PORT = 4200; // The port on which the frontend app runs.
 
 export const ElectroDmConfig = {
-	numLEDs: 20,
+	numLEDs: NUM_LEDS,
 	baudRate: BAUD_RATE,
+	brightness: 50,
 	port: undefined, // Leave undefined to default to 'Find' the serial port
 	ip: '127.0.0.1',
 	serverPort: SERVER_PORT,

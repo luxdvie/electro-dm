@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -94,6 +95,7 @@ const routes: Routes = [
 		MatSelectModule,
 		MatTooltipModule,
 		MatExpansionModule,
+		MatSliderModule,
 	],
 	declarations: [
 		DmViewComponent,
@@ -109,7 +111,7 @@ const routes: Routes = [
 		SceneToolbarComponent,
 		CampaignToolsComponent,
 		PasswordPuzzleComponent,
-		DmPlayerComponent
+		DmPlayerComponent,
 	],
 })
 export class DmModule {}

@@ -9,7 +9,7 @@ void PlayerZone::render() {
   int stop = start + this->playerLEDCount;
 
   for (int i = start; i < stop; i++) {
-    Globals::strip.setPixelColor(i, 0, 100, 0, 0);
+    Globals::strip.setPixelColor(i, 0, 255, 0, 0);
   }
 
   if (this->offsetPongOffset >= this->offset) {
@@ -23,7 +23,7 @@ void PlayerZone::render() {
   start = start + this->offset + this->offsetPongOffset;
   stop = start + this->lightLength;
   for (int i = start; i < stop; i++) {
-    Globals::strip.setPixelColor(i, 50, 50, 50, 50);
+    Globals::strip.setPixelColor(i, 255, 255, 255, 255);
   }
 
 
@@ -44,4 +44,3 @@ void PlayerZone::enable(int position, int offset, int playerLEDCount, int lightL
   this->offsetPongDirection = 0; // going up
   this->offsetPongOffsetMin = -1 * offset;
 }
-

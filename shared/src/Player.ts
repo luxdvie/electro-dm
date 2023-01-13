@@ -179,7 +179,7 @@ export const Goblin = () => {
 		statBlock: '/assets/stat-blocks/goblin.png',
 		seat: ElectroDmConfig.dmSeat,
 		image: 'troll.png',
-		bannerImage: DMBannerImages.Troll,
+		bannerImage: DMBannerImages.Goblin,
 		race: PlayerRace.Monster,
 		playerClass: PlayerClass.Fighter,
 		playerType: PlayerType.DM,
@@ -190,15 +190,15 @@ export const Goblin = () => {
 	});
 };
 
-export const Bodak = () => {
+export const Nightwalker = () => {
 	const hp = Roll().nine().d8().value + 18;
 
 	return DmPlayer.makeDmPlayer({
-		name: 'Goblin',
-		statBlock: '/assets/stat-blocks/bodak.png',
+		name: 'Nightwalker',
+		statBlock: '/assets/profile/nightwalker.png',
 		seat: ElectroDmConfig.dmSeat,
 		image: 'unknown.png',
-		bannerImage: DMBannerImages.Anonymous,
+		bannerImage: DMBannerImages.Nightwalker,
 		race: PlayerRace.Monster,
 		playerClass: PlayerClass.Fighter,
 		playerType: PlayerType.DM,

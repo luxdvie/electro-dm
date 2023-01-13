@@ -150,6 +150,7 @@ export class BattleService {
 			numPlayers: players.length,
 		});
 
+		this.sendCommand(`CB,${ElectroDmConfig.brightness}`);
 		this.sendCommand(Commands.Off);
 		this.setPlayers(players);
 		this.setCurrentPlayer(undefined, true);

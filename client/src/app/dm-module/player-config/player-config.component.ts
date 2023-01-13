@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BattleService } from 'src/app/services/battle.service';
 import { DBService } from 'src/app/services/db.service';
-import { ElectroDmConfig, Player, PlayerBase, PlayerType } from '../../../../../shared/src';
+import {
+	ElectroDmConfig,
+	Player,
+	PlayerBase,
+	PlayerType
+} from '../../../../../shared/src';
 import { PlayerClass, PlayerRace } from '../../../../../shared/src/PlayerClass';
 import { PlayerEditDialog } from './player-edit-dialog-component';
 
@@ -13,6 +18,17 @@ import { PlayerEditDialog } from './player-edit-dialog-component';
 })
 export class PlayerConfigComponent implements OnInit {
 	players: Player[] = [];
+	get brightness() {
+		return ElectroDmConfig.brightness;
+	}
+	set brightness(value: number) {
+		if (ElectroDmConfig.brightness != value) {
+			this.battleService.sendCommand(`CB,${value}`);
+		}
+
+		ElectroDmConfig.brightness = value;
+	}
+
 	get clientUrl(): string {
 		return ElectroDmConfig.clientUrl;
 	}
@@ -76,7 +92,11 @@ export class PlayerConfigComponent implements OnInit {
 			const replaceAt = this.players.findIndex((p) => p.id === player.id);
 
 			if (replaceAt > -1) {
-				this.players.splice(replaceAt, 1, PlayerBase.makePlayer(player));
+				this.players.splice(
+					replaceAt,
+					1,
+					PlayerBase.makePlayer(player)
+				);
 				this.save();
 			}
 		});

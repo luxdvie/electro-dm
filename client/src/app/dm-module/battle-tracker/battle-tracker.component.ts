@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
 import {
-	Bodak,
 	DMBannerImages,
 	ElectroDmConfig,
-	Goblin,
-	Player,
+	Goblin, Nightwalker, Player,
 	PlayerBase,
 	PlayerType
 } from '../../../../../shared/src';
@@ -151,7 +149,7 @@ export class BattleTrackerComponent implements OnInit {
 	}
 
 	addBodak() {
-		this.battleService.addChar(Bodak());
+		this.battleService.addChar(Nightwalker());
 	}
 
 	deletePlayer(player: Player) {

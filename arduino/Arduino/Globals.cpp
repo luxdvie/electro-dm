@@ -5,6 +5,7 @@
   int Globals::numLEDs = 20;
   int Globals::numPlayers = 2;
   int Globals::maxPlayers = 6;
+  int Globals::brightness = 50;
 
   // IMPORTANT: To reduce NeoPixel burnout risk, add 1000 uF capacitor across
   // pixel power leads, add 300 - 500 Ohm resistor on first pixel's data input

@@ -9,6 +9,7 @@ class Globals {
 		static int numLEDs;
 		static int numPlayers;
 		static int maxPlayers;
+    static int brightness;
 		static Adafruit_NeoPixel strip;
     static bool configureStrip(int numLEDs, int numPlayers);
 };

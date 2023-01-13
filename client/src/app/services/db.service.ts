@@ -28,20 +28,50 @@ export class DBService {
 			} else {
 				return Promise.resolve([
 					PlayerBase.makePlayer({
-						name: 'Default Player 1',
-						race: PlayerRace.Aarakocra,
+						name: 'Drip',
+						race: PlayerRace.Plasmoid,
+						playerClass: PlayerClass.Fighter,
+						playerType: PlayerType.Player,
+						image: 'drip.jpeg',
+						dmNotes: 'Sleuth, slime into pipes and shit.',
+						seat: 2,
+					}),
+					PlayerBase.makePlayer({
+						name: 'Cassandra Ravage',
+						race: PlayerRace.Bugbear,
+						playerClass: PlayerClass.Barbarian,
+						playerType: PlayerType.Player,
+						image: 'tyler.jpeg',
+						dmNotes: 'Haymakers! WWE',
+						seat: 1,
+					}),
+					PlayerBase.makePlayer({
+						name: 'Hevesta Ironarm',
+						race: PlayerRace.Kender,
+						playerClass: PlayerClass.Cleric,
+						playerType: PlayerType.Player,
+						image: 'frances.jpeg',
+						dmNotes:
+							'Iron arm.. put it into the Hyperium reactor. Break Dr Bhaskar out of jail?',
+						seat: 0,
+					}),
+					PlayerBase.makePlayer({
+						name: 'Angelica',
+						race: PlayerRace.Fairy,
+						playerClass: PlayerClass.Sorcerer,
+						playerType: PlayerType.Player,
+						image: 'bryan.jpeg',
+						dmNotes: 'Angel',
+						seat: 3,
+					}),
+					PlayerBase.makePlayer({
+						name: 'Cornelius Hammerbottom Jr.',
+						race: PlayerRace.RockGnome,
 						playerClass: PlayerClass.Artificer,
 						playerType: PlayerType.Player,
 						image: 'unknown.png',
-						dmNotes: 'Sample DM notes...',
-					}),
-					PlayerBase.makePlayer({
-						name: 'Default Player 2',
-						race: PlayerRace.FireGenasi,
-						playerClass: PlayerClass.Fighter,
-						playerType: PlayerType.Player,
-						image: 'unknown.png',
-						dmNotes: 'Sample DM notes...',
+						dmNotes: 'steel companion... make shit... use strategium!',
+						seat: 4,
 					}),
 				]);
 			}

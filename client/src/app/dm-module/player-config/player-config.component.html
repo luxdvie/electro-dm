@@ -4,6 +4,17 @@
 		<span>Changing configurations will reset any active encounter.</span>
 	</div>
 	<div class="body">
+		<mat-card class="player-card">
+			<mat-card-header>
+				<mat-card-title>Configuration</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<mat-slider min="1" max="100" step="1" [(ngModel)]="brightness">
+					<input matSliderThumb>
+				</mat-slider>
+				Brightness: {{ brightness }}%
+			</mat-card-content>
+		</mat-card>
 		<mat-card class="player-card" *ngFor="let player of players; let i = index">
 			<mat-card-header>
 				<div mat-card-avatar class="header-image" [class.light]="player.image === 'unknown.png'"

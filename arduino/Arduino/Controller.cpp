@@ -14,6 +14,7 @@
     PP: Show the previous player, resets to the last player at the beginning
     F: Render a variable-length, variable-duration fireball
     CS: 'ConfigureServer'. example: 'CS,numLeds,numPlayers', 'CS,362,4'
+    CB: 'ConfigureBrightness'. example: 'CB,brigthnesss', 'CB,50'
     Off: Disable currentPlayer and any animations, turn off all LEDs
 */
 
@@ -48,7 +49,8 @@ void Controller::render() {
   if (this->addFire == 1) {
     this->renderFire(); 
   }
-  
+
+  Globals::strip.setBrightness(Globals::brightness);
   Globals::strip.show();
 }
 
@@ -122,6 +124,22 @@ void Controller::sendCommand(char* buf, int size) {
 
     bool wasChanged = Globals::configureStrip(numLEDs.toInt(), numPlayers.toInt());
     if (wasChanged) this->setup();
+  }
+
+  if (buf[0] == 'C' && buf[1] == 'B') {
+    // Configure brightness. buf[2] is the first comma
+    // Read from 3...n. Read brightness digits until next end.
+    // Then, convert to integer and configure the app.
+    
+    String sBrightness;
+    for (int i = 3; i < size; i++) {
+        sBrightness += buf[i];
+    }
+
+    int iBrightness = sBrightness.toInt();
+    if (iBrightness > 1 && iBrightness < 100) {
+         Globals::brightness = iBrightness; 
+    }
   }
 
   if (buf[0] == 'R') {
