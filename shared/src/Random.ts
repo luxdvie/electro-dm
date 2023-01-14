@@ -142,6 +142,21 @@ class DiceRoll {
 		this.lastModifier = 10;
 		return this;
 	}
+
+	eleven() {
+		this.lastModifier = 11;
+		return this;
+	}
+
+	twelve() {
+		this.lastModifier = 12;
+		return this;
+	}
+
+	customNumber(value: number) {
+		this.lastModifier = value;
+		return this;
+	}
 }
 
 export const Roll = () => {

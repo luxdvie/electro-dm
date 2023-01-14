@@ -18,6 +18,11 @@ export class BattleService {
 	private _currentPlayer = new BehaviorSubject<Player | undefined>(undefined);
 	currentPlayer$ = this._currentPlayer.asObservable();
 
+	private _currentPlayerIndexSubject = new BehaviorSubject<
+		number | undefined
+	>(undefined);
+	currentPlayerIndex$ = this._currentPlayerIndexSubject.asObservable();
+
 	private _playersSubject = new BehaviorSubject<Player[]>([]);
 	players$ = this._playersSubject.asObservable();
 
@@ -34,6 +39,7 @@ export class BattleService {
 	setPlayers(value: Player[], broadcast: boolean = true) {
 		this._players = value;
 		this._playersSubject.next(this._players);
+		this._currentPlayerIndexSubject.next(this._currentPlayerIndex);
 
 		if (broadcast) {
 			this.socketService.send('players', this._players);
@@ -47,6 +53,7 @@ export class BattleService {
 
 	setCurrentPlayer(value: number | undefined, broadcast: boolean = true) {
 		this._currentPlayerIndex = value;
+		this._currentPlayerIndexSubject.next(this._currentPlayerIndex);
 		if (broadcast) {
 			this.socketService.send(
 				SocketEvents.CurrentPlayerIndexReceived,

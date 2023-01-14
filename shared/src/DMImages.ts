@@ -11,5 +11,8 @@ export const DMBannerImages = {
 	'Red Dragon': 'profile/red-dragon.png',
 	Troll: 'profile/troll.png',
 	Nightwalker: 'profile/nightwalker.png',
-	Goblin: 'profile/goblin.png'
+	Goblin: 'profile/goblin.png',
+	Lizard: 'banners/lizard.png',
+	Tiefling: 'banners/tiefling-banner.png',
+	Dragonborn: 'banners/dragonborn.png',
 };

@@ -11,103 +11,59 @@
 		<div class="right">
 			<button mat-button [matMenuTriggerFor]="menu">Add Monster</button>
 			<mat-menu #menu="matMenu">
+				<button mat-menu-item (click)="addDisasterAtTheBazaar()">Disaster at the Bazaar</button>
 				<button mat-menu-item (click)="addGoblin()">Add Goblin</button>
-				<button mat-menu-item (click)="addBodak()">Add Bodak</button>
+				<button mat-menu-item (click)="addNightWalker()">Add Bodak</button>
+				<button mat-menu-item (click)="addRohan()">Add Rohan</button>
+				<button mat-menu-item (click)="addDevi()">Add Devi</button>
+				<button mat-menu-item (click)="addDevi(); addRohan()">Add Rohan+Devi</button>
 			</mat-menu>
 		</div>
 	</div>
 	<div class="body">
-		<mat-card class="player-card" *ngFor="let player of players; let i = index"
-			[class.current-player]="currentPlayerIndex === i">
-			<ng-container *ngIf="player.lifeState === 'Dead'">
-				<div class="dead-alert"></div>
-			</ng-container>
-
-			<ng-container *ngIf="player.lifeState === 'Dying'">
-				<div class="dying-alert"></div>
-			</ng-container>
-
-			<mat-card-header>
-				<div mat-card-avatar class="header-image" [class.light]="player.image === 'unknown.png'"
-					[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/profile/' + player.image + ' )' }">
-				</div>
-				<mat-card-title><a [href]="player.link" class="player-link sci-fi-font"
-						target="_blank">{{player.name}}</a></mat-card-title>
-				<mat-card-subtitle class="sci-fi-font">{{player.race}} {{player.playerClass}}</mat-card-subtitle>
-			</mat-card-header>
-			<mat-card-content class="card-content sci-fi-font">
-				<ng-container *ngIf="player && player.isDm()">
-					<div class="content-group multi">
-						<mat-form-field class="narrow">
-							<mat-label>Health
-								<span *ngIf="player.maxHp !== player.health">({{player.maxHp}})</span>
-							</mat-label>
-							<input matInput readonly placeholder="Health" [(ngModel)]="player.asDm().health">
-						</mat-form-field>
-						<mat-form-field class="medium">
-							<mat-label>+/- HP</mat-label>
-							<input type="number" [id]="'hp-ele-' + player.id" autocomplete="new-password" matInput
-								placeholder="HP value..">
-							<div class="damage-badge-container">
-								<button type="button" (click)="applyDamage(player)"
-									class="damage-badge sci-fi-font">DAMAGE</button>
-								<button type="button" (click)="applyHeal(player)"
-									class="heal-badge sci-fi-font">HEAL</button>
-							</div>
-						</mat-form-field>
-						<ng-container *ngIf="player.lifeState === 'Dead' || player.lifeState === 'Dying'">
-							<span class="dying-alert-text">{{player.lifeState}}</span>
-						</ng-container>
-					</div>
-					<mat-accordion>
-						<mat-expansion-panel>
-							<mat-expansion-panel-header>
-								<mat-panel-title>
-									View Stat Block
-								</mat-panel-title>
-							</mat-expansion-panel-header>
-							<img class="stat-block" *ngIf="player.asDm().statBlock" [src]="player.asDm().statBlock">
-						</mat-expansion-panel>
-						<mat-expansion-panel>
-							<mat-expansion-panel-header>
-								<mat-panel-title>
-									View DM Notes
-								</mat-panel-title>
-							</mat-expansion-panel-header>
-							<p [innerHtml]="player.dmNotes">
-							</p>
-						</mat-expansion-panel>
-						<mat-expansion-panel>
-							<mat-expansion-panel-header>
-								<mat-panel-title>
-									Change Banner Image
-								</mat-panel-title>
-							</mat-expansion-panel-header>
-							<div class="content-group">
-								<div class="dm-banner">
-									<div class="col">
-										<mat-form-field appearance="fill">
-											<mat-label>DM Icon:</mat-label>
-											<select matNativeControl [(ngModel)]="player.bannerImage" name="bannerImage"
-												(change)="onChangeImage()">
-												<option value="" selected></option>
-												<option *ngFor="let image of dmImages" [value]="image.value">
-													{{image.viewValue}}
-												</option>
-											</select>
-										</mat-form-field>
-										<div *ngIf="player.bannerImage" class="banner-preview">
-											<img [src]="clientUrl + '/assets/' + player.bannerImage">
-										</div>
-									</div>
-								</div>
-							</div>
-						</mat-expansion-panel>
-					</mat-accordion>
-
+		<div class="players">
+			<mat-card class="player-card" *ngFor="let player of players; let i = index"
+				[class.current-player]="currentPlayerIndex === i" (click)="selectPlayer(player)"
+				[class.selected-player]="selectedPlayer && selectedPlayer.id === player.id">
+				<ng-container *ngIf="player.lifeState === 'Dead'">
+					<div class="dead-alert"></div>
 				</ng-container>
 
-				<ng-container *ngIf="player.playerType !== 'DM'">
+				<ng-container *ngIf="player.lifeState === 'Dying'">
+					<div class="dying-alert"></div>
+				</ng-container>
+
+				<mat-card-header>
+					<div mat-card-avatar class="header-image" [class.light]="player.image === 'unknown.png'"
+						[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/profile/' + player.image + ' )' }">
+					</div>
+					<mat-card-title><a [href]="player.link" class="player-link sci-fi-font"
+							target="_blank">{{player.name}}</a></mat-card-title>
+					<mat-card-subtitle class="sci-fi-font">{{player.race}} {{player.playerClass}}</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content class="card-content sci-fi-font">
+					<!-- TODO: Make the player editable in the battle tracker component...duh -->
+					<div *ngIf="isBattleActive" class="init sci-fi-font"
+						[class.current-player]="currentPlayerIndex === i">
+						<input [attr.data-player]="player.id" (focus)="selectOnFocus($event, player);"
+							(blur)="focusedPlayer = null" matInput
+							[class.focused]="focusedPlayer && focusedPlayer.id === player.id"
+							(change)="orderPlayers(player)" [(ngModel)]="player.initiative" type="number"
+							(keydown.enter)="onEnterKeydown($event, player)"
+							(keydown.tab)="onTabKeydown($event, player)" class="sci-fi-font">
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
+		<div class="details">
+			<ng-container *ngIf="selectedPlayer">
+				<div class="details-container">
+					<div class="content-group multi details-header">
+						<div mat-card-avatar class="header-image" [class.light]="selectedPlayer.image === 'unknown.png'"
+							[ngStyle]="{ 'background-image': 'url(' + clientUrl + '/assets/profile/' + selectedPlayer.image + ' )' }">
+						</div>
+						<h1 class="sci-fi-font">{{selectedPlayer.name}}</h1>
+					</div>
 					<div class="content-group">
 						<mat-accordion>
 							<mat-expansion-panel>
@@ -116,27 +72,97 @@
 										View DM Notes
 									</mat-panel-title>
 								</mat-expansion-panel-header>
-								<p [innerHtml]="player.dmNotes">
+								<p [innerHtml]="selectedPlayer.dmNotes">
 								</p>
 							</mat-expansion-panel>
 						</mat-accordion>
 					</div>
-				</ng-container>
 
-				<div *ngIf="!isBattleActive || player.playerType === 'DM'" class="content-group">
-					<button mat-raised-button color="warn" (click)="deletePlayer(player)">Delete</button>
-				</div>
+					<ng-container *ngIf="selectedPlayer.isDm()">
+						<div class="content-group multi">
+							<mat-form-field class="narrow">
+								<mat-label>Health
+									<span
+										*ngIf="selectedPlayer.maxHp !== selectedPlayer.health">({{selectedPlayer.maxHp}})</span>
+								</mat-label>
+								<input matInput readonly placeholder="Health"
+									[(ngModel)]="selectedPlayer.asDm().health">
+							</mat-form-field>
+							<mat-form-field class="medium">
+								<mat-label>+/- HP</mat-label>
+								<input type="number" [id]="'hp-ele-' + selectedPlayer.id" autocomplete="new-password"
+									matInput placeholder="HP value..">
+								<div class="damage-badge-container">
+									<button type="button" (click)="applyDamage(selectedPlayer)"
+										class="damage-badge sci-fi-font">DAMAGE</button>
+									<button type="button" (click)="applyHeal(selectedPlayer)"
+										class="heal-badge sci-fi-font">HEAL</button>
+								</div>
+							</mat-form-field>
+							<ng-container
+								*ngIf="selectedPlayer.lifeState === 'Dead' || selectedPlayer.lifeState === 'Dying'">
+								<span class="dying-alert-text">{{selectedPlayer.lifeState}}</span>
+							</ng-container>
+						</div>
+					</ng-container>
 
-				<!-- TODO: Make the player editable in the battle tracker component...duh -->
-				<div *ngIf="isBattleActive" class="init sci-fi-font" [class.current-player]="currentPlayerIndex === i">
-					<input [attr.data-player]="player.id" (focus)="selectOnFocus($event, player);"
-						(blur)="focusedPlayer = null" matInput
-						[class.focused]="focusedPlayer && focusedPlayer.id === player.id"
-						(change)="orderPlayers(player)" [(ngModel)]="player.initiative" type="number"
-						(keydown.enter)="onEnterKeydown($event, player)" (keydown.tab)="onTabKeydown($event, player)"
-						class="sci-fi-font">
+					<div class="content-group">
+						<mat-accordion>
+							<mat-expansion-panel *ngIf="selectedPlayer.isDm()">
+								<mat-expansion-panel-header>
+									<mat-panel-title>
+										View Stat Block
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<img class="stat-block" *ngIf="selectedPlayer.asDm().statBlock"
+									[src]="selectedPlayer.asDm().statBlock">
+							</mat-expansion-panel>
+							<mat-expansion-panel>
+								<mat-expansion-panel-header>
+									<mat-panel-title>
+										View DM Notes
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<p [innerHtml]="selectedPlayer.dmNotes">
+								</p>
+							</mat-expansion-panel>
+							<mat-expansion-panel>
+								<mat-expansion-panel-header>
+									<mat-panel-title>
+										Change Banner Image
+									</mat-panel-title>
+								</mat-expansion-panel-header>
+								<div class="content-group">
+									<div class="dm-banner">
+										<div class="col">
+											<mat-form-field appearance="fill">
+												<mat-label>DM Icon:</mat-label>
+												<select matNativeControl [(ngModel)]="selectedPlayer.bannerImage"
+													name="bannerImage" (change)="onChangeImage()">
+													<option value="" selected></option>
+													<option *ngFor="let image of dmImages" [value]="image.value">
+														{{image.viewValue}}
+													</option>
+												</select>
+											</mat-form-field>
+											<div *ngIf="selectedPlayer.bannerImage" class="banner-preview">
+												<img [src]="clientUrl + '/assets/' + selectedPlayer.bannerImage">
+											</div>
+										</div>
+									</div>
+								</div>
+							</mat-expansion-panel>
+						</mat-accordion>
+					</div>
+
+					<div *ngIf="!isBattleActive || selectedPlayer.playerType === 'DM'" class="content-group">
+						<div class="content-group">
+							<button mat-raised-button color="warn"
+								(click)="deletePlayer(selectedPlayer)">Delete</button>
+						</div>
+					</div>
 				</div>
-			</mat-card-content>
-		</mat-card>
+			</ng-container>
+		</div>
 	</div>
 </div>

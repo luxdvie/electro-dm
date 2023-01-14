@@ -187,6 +187,7 @@ export const Goblin = () => {
 		dmNotes: 'dm character',
 		health: hp,
 		maxHp: hp,
+		initiative: Roll().d20().value
 	});
 };
 
@@ -195,7 +196,7 @@ export const Nightwalker = () => {
 
 	return DmPlayer.makeDmPlayer({
 		name: 'Nightwalker',
-		statBlock: '/assets/profile/nightwalker.png',
+		statBlock: '/assets/stat-blocks/bodak.png',
 		seat: ElectroDmConfig.dmSeat,
 		image: 'unknown.png',
 		bannerImage: DMBannerImages.Nightwalker,
@@ -206,5 +207,86 @@ export const Nightwalker = () => {
 		dmNotes: 'nightwalker stat replacement',
 		health: hp,
 		maxHp: hp,
+		initiative: Roll().d20().value
+	});
+};
+
+export const Rohan = () => {
+	const hp = Roll().nine().d12().value + 30;
+
+	return DmPlayer.makeDmPlayer({
+		name: 'Rohan',
+		statBlock: '/assets/stat-blocks/rohan.png',
+		seat: ElectroDmConfig.dmSeat,
+		image: 'rohan.png',
+		bannerImage: DMBannerImages.Orc,
+		race: PlayerRace.HalfOrc,
+		playerClass: PlayerClass.Fighter,
+		playerType: PlayerType.DM,
+		link: 'https://www.dndbeyond.com/monsters/2821170-githyanki-buccaneer',
+		dmNotes: 'Rohan carries an greatsword!',
+		health: hp,
+		maxHp: hp,
+		initiative: Roll().d20().value
+	});
+};
+
+export const EngineerDevi = () => {
+	const hp = Roll().four().d12().value + 20;
+
+	return DmPlayer.makeDmPlayer({
+		name: 'Engineer Devi',
+		statBlock: '/assets/stat-blocks/engineer-devi.png',
+		seat: ElectroDmConfig.dmSeat,
+		image: 'engineer-devi.png',
+		bannerImage: DMBannerImages.Lizard,
+		race: PlayerRace.Lizardfolk,
+		playerClass: PlayerClass.Fighter,
+		playerType: PlayerType.DM,
+		link: 'https://www.dndbeyond.com/monsters/16946-lizardfolk',
+		dmNotes: '',
+		health: hp,
+		maxHp: hp,
+		initiative: Roll().d20().value
+	});
+};
+
+export const Tiefling = (customName?: string) => {
+	const hp = Roll().seven().d8().value + 33;
+
+	return DmPlayer.makeDmPlayer({
+		name: customName || 'Tiefling',
+		statBlock: '/assets/stat-blocks/tiefling.png',
+		seat: ElectroDmConfig.dmSeat,
+		image: 'tiefling.png',
+		bannerImage: DMBannerImages.Tiefling,
+		race: PlayerRace.Tiefling,
+		playerClass: PlayerClass.Fighter,
+		playerType: PlayerType.DM,
+		link: 'https://www.dndbeyond.com/monsters/17137-cambion',
+		dmNotes: '',
+		health: hp,
+		maxHp: hp,
+		initiative: Roll().d20().value
+	});
+};
+
+export const Dragonborn = () => {
+	const hp = Roll().four().d8().value + 20;
+
+	return DmPlayer.makeDmPlayer({
+		name: 'Dragonborn',
+		statBlock: '/assets/stat-blocks/dragonborn.png',
+		seat: ElectroDmConfig.dmSeat,
+		image: 'dragonborn.png',
+		bannerImage: DMBannerImages.Dragonborn,
+		race: PlayerRace.Dragornborn,
+		playerClass: PlayerClass.Fighter,
+		playerType: PlayerType.DM,
+		link: 'https://www.aidedd.org/dnd/monstres.php?vo=half-red-dragon-veteran',
+		dmNotes: 'Will play him at much lower CR',
+		health: hp,
+		maxHp: hp,
+		initiative: Roll().d20().value
 	});
 };

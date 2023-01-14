@@ -60,7 +60,7 @@ export class DBService {
 						race: PlayerRace.Fairy,
 						playerClass: PlayerClass.Sorcerer,
 						playerType: PlayerType.Player,
-						image: 'bryan.jpeg',
+						image: 'bgreen.jpeg',
 						dmNotes: 'Angel',
 						seat: 3,
 					}),

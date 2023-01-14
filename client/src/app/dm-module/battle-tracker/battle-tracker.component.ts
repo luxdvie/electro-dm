@@ -3,10 +3,16 @@ import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
 import {
 	DMBannerImages,
+	Dragonborn,
 	ElectroDmConfig,
-	Goblin, Nightwalker, Player,
+	EngineerDevi,
+	Goblin,
+	Nightwalker,
+	Player,
 	PlayerBase,
-	PlayerType
+	PlayerType,
+	Rohan,
+	Tiefling
 } from '../../../../../shared/src';
 import { PlayerClass, PlayerRace } from '../../../../../shared/src/PlayerClass';
 
@@ -19,6 +25,8 @@ export class BattleTrackerComponent implements OnInit {
 	get clientUrl(): string {
 		return ElectroDmConfig.clientUrl;
 	}
+
+	selectedPlayer: Player | null = null;
 
 	isBattleActive: boolean = false;
 
@@ -34,9 +42,7 @@ export class BattleTrackerComponent implements OnInit {
 	}
 
 	currentPlayer: Player | undefined;
-	get currentPlayerIndex() {
-		return this.battleService.currentPlayerIndex;
-	}
+	currentPlayerIndex: number | undefined = undefined;
 
 	constructor(
 		protected battleService: BattleService,
@@ -46,6 +52,14 @@ export class BattleTrackerComponent implements OnInit {
 	ngOnInit(): void {
 		this.battleService.battleActive$.subscribe((isActive) => {
 			this.isBattleActive = isActive;
+		});
+
+		this.battleService.currentPlayerIndex$.subscribe((idx) => {
+			this.currentPlayerIndex = idx;
+			if (this.currentPlayerIndex !== undefined) {
+				const player = this.players[this.currentPlayerIndex];
+				this.selectPlayer(player);
+			}
 		});
 	}
 
@@ -123,6 +137,7 @@ export class BattleTrackerComponent implements OnInit {
 
 	async reset() {
 		await this.battleService.reset();
+		this.selectedPlayer = null;
 	}
 
 	startOrNext() {
@@ -148,8 +163,23 @@ export class BattleTrackerComponent implements OnInit {
 		this.battleService.addChar(Goblin());
 	}
 
-	addBodak() {
+	addNightWalker() {
 		this.battleService.addChar(Nightwalker());
+	}
+
+	addRohan() {
+		this.battleService.addChar(Rohan());
+	}
+
+	addDevi() {
+		this.battleService.addChar(EngineerDevi());
+	}
+
+	addDisasterAtTheBazaar() {
+		this.battleService.addChar(Tiefling('Tiefling Leader'));
+		this.battleService.addChar(Tiefling('Tiefling Captain'));
+		this.battleService.addChar(Tiefling('Tiefling Recruit'));
+		this.battleService.addChar(Dragonborn());
 	}
 
 	deletePlayer(player: Player) {
@@ -197,5 +227,9 @@ export class BattleTrackerComponent implements OnInit {
 			player.applyHeal(heal);
 			this.battleService.savePlayers();
 		}
+	}
+
+	selectPlayer(player: Player) {
+		this.selectedPlayer = player;
 	}
 }
