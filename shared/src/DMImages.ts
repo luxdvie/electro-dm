@@ -15,4 +15,5 @@ export const DMBannerImages = {
 	Lizard: 'banners/lizard.png',
 	Tiefling: 'banners/tiefling-banner.png',
 	Dragonborn: 'banners/dragonborn.png',
+	Spider: 'banners/spider.png'
 };

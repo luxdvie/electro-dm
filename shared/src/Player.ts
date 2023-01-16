@@ -172,7 +172,7 @@ export class DmPlayer extends PlayerBase {
 export type Player = DmPlayer | PlayerBase;
 
 export const Goblin = () => {
-	const hp = Roll().two().d6().value;
+	const hp = Roll().five().d6().value;
 
 	return DmPlayer.makeDmPlayer({
 		name: 'Goblin',
@@ -285,6 +285,26 @@ export const Dragonborn = () => {
 		playerType: PlayerType.DM,
 		link: 'https://www.aidedd.org/dnd/monstres.php?vo=half-red-dragon-veteran',
 		dmNotes: 'Will play him at much lower CR',
+		health: hp,
+		maxHp: hp,
+		initiative: Roll().d20().value
+	});
+};
+
+export const Spider = () => {
+	const hp = Roll().four().d10().value + 8;
+
+	return DmPlayer.makeDmPlayer({
+		name: 'Spider',
+		statBlock: '/assets/stat-blocks/spider.png',
+		seat: ElectroDmConfig.dmSeat,
+		image: 'spider.png',
+		bannerImage: DMBannerImages.Spider,
+		race: PlayerRace.Monster,
+		playerClass: PlayerClass.Fighter,
+		playerType: PlayerType.DM,
+		link: 'https://www.dndbeyond.com/monsters/16895-giant-spider',
+		dmNotes: '',
 		health: hp,
 		maxHp: hp,
 		initiative: Roll().d20().value

@@ -12,6 +12,7 @@ import {
 	PlayerBase,
 	PlayerType,
 	Rohan,
+	Spider,
 	Tiefling
 } from '../../../../../shared/src';
 import { PlayerClass, PlayerRace } from '../../../../../shared/src/PlayerClass';
@@ -161,6 +162,10 @@ export class BattleTrackerComponent implements OnInit {
 
 	addGoblin() {
 		this.battleService.addChar(Goblin());
+	}
+
+	addSpider() {
+		this.battleService.addChar(Spider());
 	}
 
 	addNightWalker() {
