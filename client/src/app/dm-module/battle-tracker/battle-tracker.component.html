@@ -11,13 +11,19 @@
 		<div class="right">
 			<button mat-button [matMenuTriggerFor]="menu">Add Monster</button>
 			<mat-menu #menu="matMenu">
-				<button mat-menu-item (click)="addDisasterAtTheBazaar()">Disaster at the Bazaar</button>
+				<!-- <button mat-menu-item (click)="addDisasterAtTheBazaar()">Disaster at the Bazaar</button> -->
+				<button mat-menu-item (click)="addDeputies()">Add Deputies</button>
+				<button mat-menu-item (click)="addHighwayBattle()">Add HighwayBattle</button>
+				<button mat-menu-item (click)="addHerpesBattle()">Add Herpes Battle</button>
+				<button mat-menu-item (click)="addBBEG()">Add BBEG</button>
+				<button mat-menu-item (click)="addHunter()">Add Hunter (Cleetus)</button>
+
 				<button mat-menu-item (click)="addGoblin()">Add Goblin</button>
 				<button mat-menu-item (click)="addSpider()">Add Spider</button>
 				<button mat-menu-item (click)="addNightWalker()">Add Bodak</button>
-				<button mat-menu-item (click)="addRohan()">Add Rohan</button>
-				<button mat-menu-item (click)="addDevi()">Add Devi</button>
-				<button mat-menu-item (click)="addDevi(); addRohan()">Add Rohan+Devi</button>
+				<!-- <button mat-menu-item (click)="addRohan()">Add Rohan</button> -->
+				<!-- <button mat-menu-item (click)="addDevi()">Add Devi</button> -->
+				<!-- <button mat-menu-item (click)="addDevi(); addRohan()">Add Rohan+Devi</button> -->
 			</mat-menu>
 		</div>
 	</div>

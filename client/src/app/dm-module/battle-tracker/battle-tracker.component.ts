@@ -2,18 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { BattleService } from 'src/app/services/battle.service';
 import { SocketServiceService } from 'src/app/services/socket-service.service';
 import {
+	Connor,
 	DMBannerImages,
+	Deputy,
+	DevilDog,
+	Dog,
 	Dragonborn,
 	ElectroDmConfig,
 	EngineerDevi,
 	Goblin,
+	HerpesHag,
+	Hunter,
+	JoshWerewolf,
 	Nightwalker,
 	Player,
 	PlayerBase,
 	PlayerType,
+	PurpleTentacle,
+	RedTentacle,
 	Rohan,
+	Shubub,
 	Spider,
-	Tiefling
+	Tiefling,
 } from '../../../../../shared/src';
 import { PlayerClass, PlayerRace } from '../../../../../shared/src/PlayerClass';
 
@@ -176,8 +186,42 @@ export class BattleTrackerComponent implements OnInit {
 		this.battleService.addChar(Rohan());
 	}
 
+	addDeputies() {
+		this.battleService.addChar(Deputy('Deputy Gomer "Goober" Smoot'));
+		this.battleService.addChar(Deputy('Deputy Daisy May Taterbug'));
+	}
+
+	addHerpesBattle() {
+		this.battleService.addChar(Dog('Red'));
+		this.battleService.addChar(Dog('Green'));
+		this.battleService.addChar(Dog('Blue'));
+		this.battleService.addChar(DevilDog());
+		this.battleService.addChar(HerpesHag());
+	}
+
+	addJoshWolf() {
+		this.battleService.addChar(JoshWerewolf());
+	}
+
+	addHunter() {
+		this.battleService.addChar(Hunter());
+	}
+
 	addDevi() {
 		this.battleService.addChar(EngineerDevi());
+	}
+
+	addBBEG() {
+		this.battleService.addChar(PurpleTentacle('Blue'));
+		this.battleService.addChar(PurpleTentacle('White'));
+		this.battleService.addChar(RedTentacle('Yellow'));
+		this.battleService.addChar(RedTentacle('Green'));
+		this.battleService.addChar(Shubub());
+	}
+
+	addHighwayBattle() {
+		this.battleService.addChar(Connor());
+		this.battleService.addChar(Spider());
 	}
 
 	addDisasterAtTheBazaar() {
